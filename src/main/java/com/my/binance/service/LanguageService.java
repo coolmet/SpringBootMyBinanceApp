@@ -1,0 +1,164 @@
+package com.my.binance.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import javax.annotation.PostConstruct;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.stereotype.Service;
+import com.my.binance.model.Language;
+
+@Service
+public class LanguageService
+{
+	private List<Language> languages;
+	
+	@PostConstruct
+	public void init()
+	{
+		System.out.println("------------------------------");
+		languages=new ArrayList<>();
+		languages.add(new Language(0,"Turkish","tr","TR","tr_TR",new Locale("tr","TR"),"T"));
+		languages.add(new Language(0,"English","en","EN","en_EN",new Locale("en","EN"),"E"));
+		languages.add(new Language(0,"Deutsch","de","DE","de_DE",new Locale("de","DE"),"D"));
+	}
+	
+	public Locale getLocale(String localeLongName)
+	{
+		for(Language lang:languages)
+		{
+			if(lang.getLocaleLongName().equals(localeLongName))
+			{
+				return lang.getLocale();
+			}
+		}
+		return null;
+	}
+	
+	public String getLanguageCode(String localeLongName)
+	{
+		for(Language lang:languages)
+		{
+			if(lang.getLocaleLongName().equals(localeLongName))
+			{
+				return lang.getLanguageCode();
+			}
+		}
+		return "";
+	}
+	
+	public String getEdpLang(String localeLongName)
+	{
+		for(Language lang:languages)
+		{
+			if(lang.getLocaleLongName().equals(localeLongName))
+			{
+				return lang.getEdplang();
+			}
+		}
+		return "";
+	}
+	
+	public String getCountryCode(String localeLongName)
+	{
+		for(Language lang:languages)
+		{
+			if(lang.getLocaleLongName().equals(localeLongName))
+			{
+				return lang.getCountryCode();
+			}
+		}
+		return "";
+	}
+	
+	public String getDefaultLocaleLongName()
+	{
+		
+		Locale defLocale=LocaleContextHolder.getLocale();
+		for(Language lang:languages)
+		{
+			if(lang.getLocale().equals(defLocale))
+			{
+				return lang.getLocaleLongName();
+			}
+		}
+		return "";
+	}
+	
+	public String getDefaultLocaleEdpLang()
+	{
+		
+		Locale defLocale=LocaleContextHolder.getLocale();
+		for(Language lang:languages)
+		{
+			if(lang.getLocale().equals(defLocale))
+			{
+				return lang.getEdplang();
+			}
+		}
+		return "";
+	}
+	
+	public String getLocaleEdpLang(String localeLongName)
+	{		
+		for(Language lang:languages)
+		{
+			if(lang.getLocaleLongName().equals(localeLongName))
+			{
+				return lang.getEdplang();
+			}
+		}
+		return "";
+	}
+	
+	public List<Language> getLanguages()
+	{
+		return languages;
+	}
+	
+	public void setLanguages(List<Language> languages)
+	{
+		this.languages=languages;
+	}
+	
+	public String getCurrentLocaleDisplayName() // Türkçe (Türkiye)
+	{
+		return LocaleContextHolder.getLocale().getDisplayName();
+	}
+	
+	public String getCurrentCountry() // TR
+	{
+		return LocaleContextHolder.getLocale().getCountry();
+	}
+	
+	public String getCurrentDisplayCountry() // Türkiye
+	{
+		return LocaleContextHolder.getLocale().getDisplayCountry();
+	}
+	
+	public String getCurrentDisplayLanguage() // Türkçe
+	{
+		return LocaleContextHolder.getLocale().getDisplayLanguage();
+	}
+	
+	public String getCurrentISO3Country() // TUR
+	{
+		return LocaleContextHolder.getLocale().getISO3Country();
+	}
+	
+	public String getCurrentISO3Language() // tur
+	{
+		return LocaleContextHolder.getLocale().getISO3Language();
+	}
+	
+	public String getCurrentLanguage() // tr
+	{
+		return LocaleContextHolder.getLocale().getLanguage();
+	}
+	
+	public String getCurrentLanguageTag() // tr-TR
+	{
+		return LocaleContextHolder.getLocale().toLanguageTag();
+	}
+	
+}
