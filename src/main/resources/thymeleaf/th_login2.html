@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
+
+<head>
+<title th:text="#{login.pagetitle}"></title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale = 1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<!--===============================================================================================-->
+<link rel="icon" type="image/png" th:href="@{/images/mobile.ico}" />
+<!--===============================================================================================-->
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/appstyle.css}" />
+
+</head>
+
+
+<body>
+
+	<div th:insert="fragments/headernavbar.html :: FRG_header_navbar"></div>
+
+	<div class="abaslogincontainer">
+		<h1>Login Page</h1>
+
+		<form th:action="login" method="post">
+			<label for="username" th:text="#{login.label.username}"></label>
+			<br />
+			<input type="text" id="username" name="username" autofocus="autofocus" />
+			<br />
+			<label for="password" th:text="#{login.label.password}"></label>
+			<br />
+			<input type="password" id="password" name="password" />
+			<br />
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+			<label for="remember-me" th:text="#{login.label.rememberme}"></label>
+			<input id="remember-me" name="remember-me" type="checkbox">
+			<br />
+			<button id="update" type="submit" th:text="#{login.button.submit}"></button>
+		</form>
+
+		<div th:if="${#request.getParameter('loginFailed') == 'true'}" style="color: red; margin: 10px 0px;">
+			<div class="alert-danger">
+				<span class="alertclosebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+				<span th:utext="#{login.message.failed}"></span>
+				<br />
+				<span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}" th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}"> Static summary </span>
+			</div>
+		</div>
+
+
+	</div>
+</body>
