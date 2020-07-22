@@ -1,0 +1,16 @@
+users:
+  admins:
+  - password: admin
+    roles: [ADMIN]
+    username: admin
+  - password: admin1
+    roles: [ADMIN]
+    username: admin1
+  rests:
+  - password: rest
+    roles: [RESTUSER]
+    username: rest
+  - password: rest1
+    roles: [RESTUSER]
+    username: rest1
+

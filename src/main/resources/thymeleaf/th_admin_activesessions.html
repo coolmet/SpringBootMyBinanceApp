@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
+
+<head>
+<title>Active Sessions</title>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale = 1.0, minimum-scale=1.0, maximum-scale=1.2, user-scalable=no" />
+
+<!--===============================================================================================-->
+
+<!--===============================================================================================-->
+
+</head>
+
+<body>
+
+	<!-- ################################## -->
+	<table id=usertable>
+		<thead>
+			<tr style="font-weight: bold;" bgcolor="#5DBCD2">
+				<th th:text="username" />
+				<th th:text="password" />
+				<th th:text="enabled" />
+				<th th:text="accountnotexpired" />
+				<th th:text="credentialsnotexpired" />
+				<th th:text="accountnotlocked" />
+				<th th:text="grantedauthorities" />
+			</tr>
+		</thead>
+		<th:block th:each="sessioninfo,iterStat:${allSessions}">
+			<tr th:bgcolor="${iterStat.odd}?white:lightgray">
+				<td th:text="${sessioninfo.getUsername()}" />
+				<td th:text="${sessioninfo.getPassword()}" />
+				<td th:text="${sessioninfo.isEnabled()}" />
+				<td th:text="${sessioninfo.isAccountNonExpired()}" />
+				<td th:text="${sessioninfo.isCredentialsNonExpired()}" />
+				<td th:text="${sessioninfo.isAccountNonLocked()}" />
+				<td th:text="${sessioninfo.getAuthorities().toString()}" />
+			</tr>
+		</th:block>
+		<th:block>
+			<td th:text="${activeSession.getUsername()}">
+			<td th:text="${activeSession.getPassword()}">
+			<td th:text="${activeSession.isEnabled()}">
+			<td th:text="${activeSession.isAccountNonExpired()}">
+			<td th:text="${activeSession.isCredentialsNonExpired()}">
+			<td th:text="${activeSession.isAccountNonLocked()}">
+			<td th:text="${activeSession.getAuthorities().toString()}">
+		</th:block>
+	</table>
+	<!-- ################################## -->
+
+
+</body>
