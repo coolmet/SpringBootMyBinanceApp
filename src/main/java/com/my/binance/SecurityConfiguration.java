@@ -75,6 +75,7 @@ public class SecurityConfiguration
 		
 		public RestSecurity(UserDetailsService userDetailsService,BCryptPasswordEncoder bCryptPasswordEncoder)
 		{
+			super();
 			this.userDetailsService=userDetailsService;
 			this.bCryptPasswordEncoder=bCryptPasswordEncoder;
 		}
