@@ -98,7 +98,7 @@ public class SecurityConfiguration
 			    .antMatchers(HttpMethod.POST,"/restlogin").permitAll()
 			    .antMatchers(// @formatter:off
 			                 "/rest",
-			                 "/rest/*",
+			                 "/rest/*", 
 			                 "/rest/**"
 			                 // @formatter:on
 				)
