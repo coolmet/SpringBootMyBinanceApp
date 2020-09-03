@@ -66,7 +66,7 @@ public class SecurityConfiguration
 	}
 	
 	@Configuration
-	@Order(value=1)
+	@Order(1)
 	class RestSecurity extends WebSecurityConfigurerAdapter
 	{
 		private UserDetailsService userDetailsService;
@@ -91,27 +91,24 @@ public class SecurityConfiguration
 		@Override
 		protected void configure(HttpSecurity http) throws Exception
 		{
-			
-			http.httpBasic().and().cors().and().csrf().disable()
+			http.httpBasic().and()
+			    .antMatcher("**/")
+			    .cors().and().csrf().disable()
 			    .authorizeRequests()
-			    .antMatchers(HttpMethod.POST,"/login").permitAll()
+			    .antMatchers(HttpMethod.POST,"/restlogin").permitAll()
 			    .antMatchers(// @formatter:off
 			                 "/rest",
 			                 "/rest/*",
 			                 "/rest/**"
 			                 // @formatter:on
 				)
-			    .hasAnyRole("RESTUSER","ADMIN")
-			    // .access("hasRole('RESTUSER','ADMIN')")
-			    // .hasRole("RESTUSER")
+			    .hasAnyRole("RESTUSER","ADMIN") // .access("hasRole('RESTUSER','ADMIN')") // .hasRole("RESTUSER")
 			    .anyRequest().authenticated()
-			    //
-			    .and().formLogin().disable()
+			    .and()
 			    .addFilter(new JWTAuthenticationFilter(authenticationManager(),getApplicationContext()))
 			    .addFilter(new JWTAuthorizationFilter(authenticationManager(),getApplicationContext()))
 			    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 				
-			// http.headers().frameOptions().disable();
 		}
 		
 	}
@@ -120,9 +117,15 @@ public class SecurityConfiguration
 	@Order(2)
 	class THSecurity extends WebSecurityConfigurerAdapter
 	{
-		public THSecurity()
+		private UserDetailsService userDetailsService;
+		@Autowired
+		private BCryptPasswordEncoder bCryptPasswordEncoder;
+		
+		public THSecurity(UserDetailsService userDetailsService,BCryptPasswordEncoder bCryptPasswordEncoder)
 		{
 			super();
+			this.userDetailsService=userDetailsService;
+			this.bCryptPasswordEncoder=bCryptPasswordEncoder;
 		}
 		
 		@Override
@@ -135,12 +138,16 @@ public class SecurityConfiguration
 			    .failureUrl("/loginweb?loginFailed=true")// .failureUrl("/login?loginFailed=true")
 			    .permitAll().and().logout().invalidateHttpSession(true).clearAuthentication(true)
 			    .deleteCookies("remember_me_cookie").logoutRequestMatcher(new AntPathRequestMatcher("/**/logout"))
-			    .logoutSuccessUrl("/?logout").permitAll().and().requestCache().and().exceptionHandling()
-			    .accessDeniedPage("/403").and().csrf().disable().authorizeRequests()
+			    .logoutSuccessUrl("/?logout").permitAll()
+			    .and().requestCache().and().exceptionHandling()
+			    .accessDeniedPage("/403")
+			    .and().csrf().disable()
+			    .authorizeRequests()
 			    .antMatchers("/**/css/**",
 			                 "/**/fonts/**",
 			                 "/**/js/**",
 			                 "/**/images/**",
+			                 "/**/error/**",
 			                 "/",
 			                 "/index",
 			                 "/login",
@@ -151,20 +158,28 @@ public class SecurityConfiguration
 			    .permitAll()
 			    //
 			    .antMatchers(// @formatter:off
-			                 "/admin",
-			                 "/admin/*",
-			                 "/admin/**"
-			                 // @formatter:on
+						  "/admin",
+						  "/admin/*",
+						  "/admin/**"
+						  // @formatter:on
 				)
 			    .hasRole("ADMIN")
 			    //
 			    .antMatchers(// @formatter:off
-			                 "/rest",
-			                 "/rest/*",
-			                 "/rest/**"
+			                 "/web",
+			                 "/web/*",
+			                 "/web/**"
 			                 // @formatter:on
 				)
-			    .access("hasRole('RESTUSER','ADMIN')")
+			    .access("hasRole('ADMIN','WEBUSER')")
+			    //
+			    .antMatchers(// @formatter:off
+						  "/rest",
+						  "/rest/*",
+						  "/rest/**"
+						  // @formatter:on
+				)
+			    .access("hasRole('ADMIN','RESTUSER')")
 			    //
 			    .anyRequest()
 			    .authenticated();

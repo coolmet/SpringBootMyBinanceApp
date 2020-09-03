@@ -6,11 +6,17 @@ users:
   - password: admin1
     roles: [ADMIN]
     username: admin1
-  rests:
+  restusers:
   - password: rest
     roles: [RESTUSER]
     username: rest
   - password: rest1
     roles: [RESTUSER]
     username: rest1
-
+  webusers:
+  - password: webuser
+    roles: [WEBUSER]
+    username: webuser
+  - password: webuser1
+    roles: [WEBUSER]
+    username: webuser1

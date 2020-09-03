@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService
 	@Override
 	@Transactional(propagation=Propagation.SUPPORTS,readOnly=true)
 	@Secured(value=
-	{"ROLE_RESTUSER"})
+	{"ROLE_RESTUSER","ROLE_ADMIN","ROLE_WEBUSER"})
 	public List<UserDetailsModel> findAll()
 	{
 		return configPropertiesUser.getUsers();

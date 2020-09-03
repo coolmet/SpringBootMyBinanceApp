@@ -154,12 +154,17 @@
       "sourceType": "com.my.binance.ConfigPropertiesUser"
     },
     {
-      "name": "users.rests",
+      "name": "users.restusers",
       "type": "java.util.List<com.my.binance.model.UserDetailsModel>",
       "sourceType": "com.my.binance.ConfigPropertiesUser"
     },
     {
       "name": "users.users",
+      "type": "java.util.List<com.my.binance.model.UserDetailsModel>",
+      "sourceType": "com.my.binance.ConfigPropertiesUser"
+    },
+    {
+      "name": "users.webusers",
       "type": "java.util.List<com.my.binance.model.UserDetailsModel>",
       "sourceType": "com.my.binance.ConfigPropertiesUser"
     }

@@ -153,5 +153,5 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/jackson/module/jackson-module-jaxb-annotations/2.11.0/jackson-module-jaxb-annotations-2.11.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/codehaus/woodstox/stax2-api/4.2/stax2-api-4.2.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/woodstox/woodstox-core/6.2.0/woodstox-core-6.2.0.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="EXTJAR" id="D:\PROJE\sts\SpringBootMyBinanceApp\extlibs\abas-jedp-v2017-3.51.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="EXTJAR" id="E:\Proje\web\SpringBootMyBinanceApp\extlibs\abas-jedp-v2017-3.51.jar" enabled="true" runInBatchMode="false"/>
 </factorypath>
