@@ -102,7 +102,7 @@ public class SecurityConfiguration
 			                 "/rest/**"
 			                 // @formatter:on
 				)
-			    .hasAnyRole("RESTUSER","ADMIN") // .access("hasRole('RESTUSER','ADMIN')") // .hasRole("RESTUSER")
+			    .hasAnyRole("ADMIN","RESTUSER") // .access("hasRole('RESTUSER','ADMIN')") // .hasRole("RESTUSER")
 			    .anyRequest().authenticated()
 			    .and()
 			    .addFilter(new JWTAuthenticationFilter(authenticationManager(),getApplicationContext()))
@@ -171,7 +171,7 @@ public class SecurityConfiguration
 			                 "/web/**"
 			                 // @formatter:on
 				)
-			    .access("hasRole('ADMIN','WEBUSER')")
+			    .access("hasRole('ROLE_ADMIN','ROLE_WEBUSER')")
 			    //
 			    .antMatchers(// @formatter:off
 						  "/rest",
@@ -179,7 +179,7 @@ public class SecurityConfiguration
 						  "/rest/**"
 						  // @formatter:on
 				)
-			    .access("hasRole('ADMIN','RESTUSER')")
+			    .access("hasRole('ROLE_ADMIN','ROLE_RESTUSER')")
 			    //
 			    .anyRequest()
 			    .authenticated();
