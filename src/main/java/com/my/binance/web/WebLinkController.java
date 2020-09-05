@@ -37,7 +37,7 @@ public class WebLinkController
 	// http://localhost:9034/admin/whreceipt2
 	// http://localhost:9034/admin/activesessions2
 	// http://localhost:9034/rest/get/json/all
-
+	
 	Logger LOGGER=LoggerFactory.getLogger(SprinBootAppConfiguration.class);
 	
 	@Autowired
@@ -89,7 +89,20 @@ public class WebLinkController
 		{
 			return "redirect:/rest/get/json/all";
 		}
+		else if(request.isUserInRole("ROLE_WEBUSER"))
+		{
+			return "redirect:/web/binance/main";
+		}
 		return "redirect:/";
+	}
+	
+	@RequestMapping(value=
+	{"/web/binance/main"})
+	public ModelAndView webbinancemain()
+	{
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("th_binance_main");
+		return mav;
 	}
 	
 	@RequestMapping(value=

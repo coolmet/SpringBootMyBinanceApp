@@ -69,37 +69,23 @@ public class SecurityConfiguration
 	@Order(1)
 	class RestSecurity extends WebSecurityConfigurerAdapter
 	{
-		private UserDetailsService userDetailsService;
-		@Autowired
-		private BCryptPasswordEncoder bCryptPasswordEncoder;
-		
-		public RestSecurity(UserDetailsService userDetailsService,BCryptPasswordEncoder bCryptPasswordEncoder)
-		{
-			super();
-			this.userDetailsService=userDetailsService;
-			this.bCryptPasswordEncoder=bCryptPasswordEncoder;
-		}
-		
-		@Bean
-		CorsConfigurationSource corsConfigurationSource()
-		{
-			final UrlBasedCorsConfigurationSource source=new UrlBasedCorsConfigurationSource();
-			source.registerCorsConfiguration("/**",new CorsConfiguration().applyPermitDefaultValues());
-			return source;
-		}
 		
 		@Override
 		protected void configure(HttpSecurity http) throws Exception
 		{
-			http.httpBasic().and()
-			    .antMatcher("**/")
-			    .cors().and().csrf().disable()
+			// JWTAuthenticationFilter>>this.setFilterProcessesUrl("/rest/login");
+			http.csrf().disable();
+			
+			http
+			    .antMatcher("/rest/**") // .antMatcher("/rest/**") .antMatcher("**/")
 			    .authorizeRequests()
-			    .antMatchers(HttpMethod.POST,"/restlogin").permitAll()
+			    .antMatchers(HttpMethod.POST,"/rest/login").permitAll()
+			    .antMatchers("/rest/login").anonymous()
+			    .antMatchers("/rest/get/**").hasRole("RESTUSER") // admin api restricted to... ADMIN
+			    .antMatchers("/rest/admin/**").hasRole("ADMIN") // admin api restricted to... ADMIN
+			    .antMatchers("/rest/public/**").permitAll() // open api is... opened
 			    .antMatchers(// @formatter:off
-			                 "/rest",
-			                 "/rest/*", 
-			                 "/rest/**"
+			                 "/rest", "/rest/*", "/rest/**"
 			                 // @formatter:on
 				)
 			    .hasAnyRole("ADMIN","RESTUSER") // .access("hasRole('RESTUSER','ADMIN')") // .hasRole("RESTUSER")
@@ -107,42 +93,23 @@ public class SecurityConfiguration
 			    .and()
 			    .addFilter(new JWTAuthenticationFilter(authenticationManager(),getApplicationContext()))
 			    .addFilter(new JWTAuthorizationFilter(authenticationManager(),getApplicationContext()))
-			    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+			    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+			    .and().httpBasic();
 				
 		}
 		
 	}
 	
 	@Configuration
-	@Order(2)
 	class THSecurity extends WebSecurityConfigurerAdapter
 	{
-		private UserDetailsService userDetailsService;
-		@Autowired
-		private BCryptPasswordEncoder bCryptPasswordEncoder;
-		
-		public THSecurity(UserDetailsService userDetailsService,BCryptPasswordEncoder bCryptPasswordEncoder)
-		{
-			super();
-			this.userDetailsService=userDetailsService;
-			this.bCryptPasswordEncoder=bCryptPasswordEncoder;
-		}
 		
 		@Override
 		protected void configure(HttpSecurity http) throws Exception
 		{
-			http.formLogin()
-			    .loginPage("/loginweb")// .loginPage("/login")
-			    .loginProcessingUrl("/login")// .loginProcessingUrl("/login")
-			    .defaultSuccessUrl("/default",true)// .defaultSuccessUrl("/default",true)
-			    .failureUrl("/loginweb?loginFailed=true")// .failureUrl("/login?loginFailed=true")
-			    .permitAll().and().logout().invalidateHttpSession(true).clearAuthentication(true)
-			    .deleteCookies("remember_me_cookie").logoutRequestMatcher(new AntPathRequestMatcher("/**/logout"))
-			    .logoutSuccessUrl("/?logout").permitAll()
-			    .and().requestCache().and().exceptionHandling()
-			    .accessDeniedPage("/403")
-			    .and().csrf().disable()
-			    .authorizeRequests()
+			http
+			    .antMatcher("/**") // configure the HttpSecurity to only be invoked when matching the provided ant pattern
+			    .authorizeRequests() // configure restricting access
 			    .antMatchers("/**/css/**",
 			                 "/**/fonts/**",
 			                 "/**/js/**",
@@ -155,34 +122,42 @@ public class SecurityConfiguration
 			                 "/**/logout",
 			                 "logout",
 			                 "/logout")
-			    .permitAll()
-			    //
+			    .permitAll() // open api is... opened
 			    .antMatchers(// @formatter:off
-						  "/admin",
-						  "/admin/*",
-						  "/admin/**"
+						  "/admin", "/admin/*", "/admin/**"
 						  // @formatter:on
 				)
 			    .hasRole("ADMIN")
 			    //
 			    .antMatchers(// @formatter:off
-			                 "/web",
-			                 "/web/*",
-			                 "/web/**"
+			                 "/web",  "/web/*",  "/web/**"
 			                 // @formatter:on
 				)
-			    .access("hasRole('ROLE_ADMIN','ROLE_WEBUSER')")
+			    .hasAnyRole("ADMIN","WEBUSER")
 			    //
 			    .antMatchers(// @formatter:off
-						  "/rest",
-						  "/rest/*",
-						  "/rest/**"
+						  "/rest",  "/rest/*",  "/rest/**"
 						  // @formatter:on
 				)
-			    .access("hasRole('ROLE_ADMIN','ROLE_RESTUSER')")
-			    //
-			    .anyRequest()
-			    .authenticated();
+			    .hasAnyRole("ADMIN","RESTUSER")
+			    .anyRequest().authenticated()
+			    .and()
+			    .formLogin()
+			    .loginPage("/loginweb")// .loginPage("/login")
+			    .loginProcessingUrl("/login")// .loginProcessingUrl("/login")
+			    .defaultSuccessUrl("/default",true)// .defaultSuccessUrl("/default",true)
+			    .failureUrl("/loginweb?loginFailed=true")// .failureUrl("/login?loginFailed=true")
+			    .and()
+			    .logout().invalidateHttpSession(true).clearAuthentication(true)
+			    .deleteCookies("remember_me_cookie").logoutRequestMatcher(new AntPathRequestMatcher("/**/logout"))
+			    .logoutSuccessUrl("/?logout")
+			    .and()
+			    .requestCache()
+			    .and()
+			    .exceptionHandling()
+			    .accessDeniedPage("/403")
+			    .and()
+			    .csrf().disable();
 				
 			http.rememberMe().userDetailsService(userDetailsService).rememberMeServices(rememberMeServices());
 			

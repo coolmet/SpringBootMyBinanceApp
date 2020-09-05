@@ -39,6 +39,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	{
 		this.authenticationManager=authenticationManager;
 		this.tokenService=ctx.getBean(TokenService.class);
+		this.setFilterProcessesUrl("/rest/login");
 	}
 	
 	@Override
