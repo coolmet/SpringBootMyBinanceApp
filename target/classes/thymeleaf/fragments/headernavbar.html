@@ -15,10 +15,20 @@
 	<th:block th:fragment="FRG_header_navbar">
 
 		<link rel="stylesheet" type="text/css" th:href="@{/css/appstyle.css}" />
+		
+		<link rel="stylesheet" type="text/css" th:href="@{/bootstrap-4.3.1/css/bootstrap.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/bootstrap-4.3.1/css/bootstrap-essentials.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/bootstrap-4.3.1/css/bootstrap-dialog.min.css}" />		
+		<script th:src="@{|/jquery-3.3.1/js/jquery.min.js?v=${#dates.createNow()}|}"></script>
+		<script th:src="@{|/logines/js/popper.min.js?v=${#dates.createNow()}|}"></script>
+		<script th:src="@{|/bootstrap-4.3.1/js/bootstrap.min.js?v=${#dates.createNow()}|}"></script>
+		<script th:src="@{|/bootstrap-4.3.1/js/bootstrap-dialog.min.js?v=${#dates.createNow()}|}"></script>		
+		<script th:src="@{|/bootstrap-4.3.1/js/bootstrap-essentials.min.js?v=${#dates.createNow()}|}"></script>
+		
 		<script type="text/javascript">
 			window.onload = function()
 				{
-					if (window.location.pathname == "/" && window.location.search =="")
+					if (window.location.pathname == "/" && window.location.search == "")
 						{
 							winOpen();
 						}
@@ -26,7 +36,7 @@
 			//
 			function winReload()
 				{
-					window.location.reload(false); 
+					window.location.reload(false);
 				}
 			//
 			var popup;
@@ -67,12 +77,15 @@
 				}
 		</script>
 
-		<th:block th:if="${#httpServletRequest.requestURI != '/' and #httpServletRequest.requestURI != '/index' }">
+		<th:block th:if="${#httpServletRequest.requestURI != '/' and #httpServletRequest.requestURI != '/index'  }">
 			<div class="topleft">
 				<button class="navbutton" th:title="#{headernavbar.tooltip.home}" onclick="window.location.href='/'" sec:authorize="hasRole('ANONYMOUS')">
 					<img src="/images/home48.png">
 				</button>
 				<button class="navbutton" th:title="#{headernavbar.tooltip.home}" onclick="window.location.href='/admin'" sec:authorize="hasRole('ADMIN')">
+					<img src="/images/home48.png">
+				</button>
+				<button class="navbutton" th:title="#{headernavbar.tooltip.home}" onclick="window.location.href='/web/binance'" sec:authorize="hasRole('USER_WEBUSER')">
 					<img src="/images/home48.png">
 				</button>
 				<button class="navbutton" th:title="#{headernavbar.tooltip.home}" onclick="window.location.href='/wh'" sec:authorize="hasRole('USER_WAREHOUSE')">
@@ -105,11 +118,14 @@
 					</button>
 				</div>
 			</div>
+			
+			<div th:replace="fragments/languagelower.html :: FRG_language"></div>
+			
 		</th:block>
-	</br>
-	</br>
-	</br>
-	</br>
+		</br>
+		</br>
+		</br>
+		</br>
 	</th:block>
 
 

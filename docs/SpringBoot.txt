@@ -1,0 +1,952 @@
+Spring Boot
+DRY	:	Dont repeat yourself (Benzer iş tekrar tekrar yapılmamalı)
+SRP	:	Single responsibility principle (Bir bileşen sadece kendi asli işine odaklanmalı)
+KISS:	keep it simple stupid (sadece gerekli fonksiyonları ekle)
+HollyWood Principle	:	Dont call us, we will call us (bileşenler arası doğrudan bağımlılıklar kaldırılır)
+Restfull + microservice
+event tabanlı haberleşme
+zero xml
+not war , jar
+
+*	STS.ini
+	-vm
+	C:\Program Files\Java\jdk1.8.0_121\bin\javaw.exe
+	
+*	window -> prefences -> validation -> suspend all validatitors
+*	window -> prefences -> run/debug -> console -> limit console output=false, fixed width console=false
+*	Maven Structure
+	src/main/java 		Uygulama kaynak kodları (*.java dosyaları)
+	src/main/resources	Uygulama resource dosyaları (*.properties, *.xml, *.png...	dosyaları)
+	src/test/java		Test kaynak kodları (*.java dosyaları)
+	src/test/resources	Test resource dosyaları (*.properties, *.xml, *.png... dosyaları)
+	target/classes		Uygulamanın kaynak kodlarının ve resource dosyalarının derlenmiş halleri	(*.class, *.properties, *.xml, *.png... dosyaları)
+	target/test-classes Uygulamanın test kaynak kodlarının ve test resource dosyalarının derlenmiş	halleri (*.class, *.properties, *.xml, *.png... dosyaları)
+	pom.xml 			Projenin POM konfigürasyon dosyası
+*	pom.xml packaing =jar, jsp-jsf varsa war
+
+*	spring-boot-starter 2.1.2
+	spring-webapp		5.1.4
+
+*	project -> new -> maven project -> use default workspace location + create a simple project 
+		pom.xml
+			|__group id		:	com.springboot
+			|__artifact id	:	SprinBootMyWebApp
+			|__packaking	:	jar
+			|__<optional>	:	true ise sadece geliştirme ortamında devreye alınacak
+		project -> rightclick -> Maven -> Update project
+			|__console -> maven console
+		project -> rightclick -> runas -> spring boot app
+		project -> rightclick -> runas -> maven build -> goals: package -> project -> f5 -> target -> xxx.jar 
+			|__	java jar xxx.jar spring.thymeleaf.enabled=false			->	Komut satırı paremetreleri 				(1. öncelik)
+			|__ java Dspring.thymeleaf.enabled=false jar xxx.jar		->	JVM sistem değişkenleri 				(2. öncelik)
+			|__	set spring.thymeleaf.enabled=false&java jar xxx.jar		->	İşletim sistemi çevre değişkenleri 		(3. öncelik)
+			|__	java -jar xxx.jar										->	classpath’deki application.properties	(4. öncelik)
+			|__*****************
+			|__java -Dspring.profiles.active=dev -jar xxx.war
+			|__@Profile("prod")
+			
+		project -> src/main/resources -> right click -> new -> file -> application.properties
+		project -> rightclick -> runas -> run configurations -> spring boot app -> VM arguments :: -Dspring.profiles.active=dev (jar için)
+		project -> rightclick -> runas -> maven build -> goals -> package (war için)
+		project -> src/main/java -> rightclick -> new source folder -> com.springboot.webapp.model
+		project -> src	-> rightclick -> new folder -> src/main/webapp/WEB-INF
+				
+*	application.properties
+		Look order:
+			|__file:./config/
+			|__file:./
+			|__classpath:/config/
+			|__classpath:/
+		Spring Boot application.properties’in isminin ve arandığı lokasyonların değiştirilmesine izin verir
+			|__spring.config.name=project
+			|__spring.config.location=classpath:/myconfig/
+			|__spring.config.location=classpath:/default.properties,classpath:/overriden.properties
+		Aktif Spring profilleri ile eşleşen application.properties dosyalarını da yükler
+			java Dspring.profiles.active=dev,h2 jar petclinic.jar
+				|__application.properties
+				|__applicationdev.properties
+				|__applicationh2.properties
+			Profile tanımı varsa order şekli
+				|__src/main/resources/application-dev.properties -> src/main/resources/application.properties
+			Profile tanımı yoksa
+				|__src/main/resources/application.properties
+				
+		management.endpoints.enabled-by-default=false		:	actuator disabled yapar
+		management.endpoints.web.exposure.include=*			:	web endpointlerini açar (2. sıradaki application.properties olsa bile)
+				
+*	Spring Boot Actuator
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+	Uygulama ile ilgili durum bilgisine erişim
+	Çalışma zamanında log konfigürasyonuna erişim
+	JVM’e yüklenen sınıflar, heap hafıza miktarı
+	Veritabanı/önbellek miktarı
+	İşletim sistemindeki process sayısı, disk kapasitesi
+	
+	HTTP endpointleri ile tarayıcı üzerinden erişilebilir
+	JMX vasıtası Java Management Console üzerinden erişilebilir
+	SSH/Telnet bağlantısı ile erişilebilir
+	
+	HTTP Endpoint Açıklama
+		|__/info 		Uygulamaya özel bir bilgi görüntüler
+		|__/health 	Uygulamanın sağlıklı çalışıp çalışmadığını sorgulamayı sağlar
+		|__/dump 		Thread dump almayı sağlar
+		|__/trace 		Uygulamaya yapılmış son 100 HTTP isteğini görüntüler
+		|__/beans 		Uygulamada tanımlı Spring bean’lerini listeler
+		|__/loggers 	Uygulamada tanımlı logger nesnelerini görüntüler
+		|__/env 		Uygulamanın ortam değişkenlerini ve değerlerini listeler
+	
+	Varsayılan durumda bütün hizmetler aktiftir
+	application.properties
+		|__management.endpoint.health.enabled=false
+		|__management.endpoints.enabled-by-default=false
+		|__management.endpoints.web.exposure.include=*
+		|__management.endpoints.web.base-path=/actuator
+	
+	Sample:
+		http://localhost:8080/actuator
+		http://localhost:8080/actuator/health   {"status":"UP"}
+		http://localhost:8080/actuator/loggers
+		http://localhost:8080/actuator/beans
+		http://localhost:8080/actuator/metrics
+		http://localhost:8080/actuator/mappings
+		http://localhost:8080/actuator/env
+
+	
+*	Spring Boot Dev Tools
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
+	Uygulamanın sadece değişen kısmı yeniden başlar
+	tarayıcı bile otomatik yenilenir
+	
+*	###SPRING-CORE###
+	@SpringBootApplication
+	public class SpringBootWebAppApplicationStarter
+		@SpringBootConfiguration
+		@EnableAutoConfiguration
+		@ComponentScan(excludeFilters = {
+		@Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),
+		@Filter(type = FilterType.CUSTOM, classes =
+		AutoConfigurationExcludeFilter.class) })
+		public @interface SpringBootApplication
+			@Configuration
+			public @interface SpringBootConfiguration
+				@Component
+				public @interface Configuration
+					@Target(ElementType.TYPE)
+					@Retention(RetentionPolicy.RUNTIME)
+					@Documented
+					public @interface Component
+					
+*	YAML Nedir?
+		|__JSON’ın superset’idir
+		|__Hiyerarşik konfigürasyon verisinin tanımlanması için oldukça uygun bir formattır
+		|__Spring Boot, YAML formatını da destekler
+			|__application.yml
+				server:
+					profiles:default
+					address: 192.168.1.1
+					port: 8081
+					context-path: /petclinic
+					tomcat:
+						basedir: /tmp
+						max-connections: 1000
+				spring:
+					profiles:dev
+				server:
+					address: 127.0.0.1
+					port: 8082
+				spring:
+					profiles:prod
+				server:
+					address: 107.180.27.155
+					port: 8083
+				logging:
+					file: petclinic.log
+					config: classpath:/custom-log4j.xml
+			|__application.properties
+				server.port=8081
+				server.context-path: /petclinic
+				server.tomcat.basedir: /tmp
+				server.tomcat.max-connections: 1000
+				logging.file: petclinic.log
+				logging.config: classpath:/custom-log4j.xml
+
+*	annotation properties
+		@EnableConfigurationProperties(value={PetClinicProperties.class})
+		@SpringBootApplication
+		public class SpringBootWebAppApplicationStarter
+			@ConfigurationProperties(prefix="petclinic")
+			public class SpringBootWebAppApplicationProperties
+				private long period;
+				private List<String> adminRoles = new ArrayList<>();
+				private FileTransfer fileTransfer = new FileTransfer();
+				public static class FileTransfer 
+				{
+					private boolean enabled;
+					private String downloadPath;
+					private String uploadPath;
+				}
+					application.properties
+						petclinic.period=1000
+						petclinic.adminRoles=VET,ADMIN
+						petclinic.fileTransfer.enabled=true
+						petclinic.fileTransfer.downloadPath=/downloads
+						petclinic.fileTransfer.uploadPath=/uploads
+		
+		###SPRING-CORE###
+		@EnableConfigurationProperties(value={PetClinicProperties.class})
+		@SpringBootApplication
+		public class PetClinicApplication
+			@Component
+			public class FileTransferManager
+			@Autowired
+			private PetClinicProperties petClinicProperties;
+			
+*	Logging	
+		|__logback (logback-spring.xml veya logback.xml), log4j2 (log4j2-spring.xml veya log4j2.xml) ve Java Util Logging (logging.properties)
+		|__Varsayılan durumda aktif log kütüphanesi logback’tir
+		|__Spring Boot, Logging API olarak da Commons Logging API ile çalışmaktadır
+		|__Herhangi başka bir 3rd party log kütüphanesi de	kullanılabilir
+		
+		|__logging.level.root=INFO
+		|__logging.level.org.hibernate.type=TRACE
+		|__logging.level.org.springframework.web=DEBUG
+		|__logging.file=/tmp/petclinic.log
+		|__logging.path=/tmp
+		|__logging.config=logback-custom-config.xml
+		
+		|__OFF
+		|__FATAL
+		|__ERROR
+		|__WARN
+		|__INFO
+		|__DEBUG
+		|__TRACE
+		
+*	CONTROLLER -> SERVICE -> DAO
+
+*	Static web resources order
+		|__Classpath’de META-INF/resources/ dizini altında
+		|__Classpath’de resources/ dizini altında
+		|__Classpath’de static/ dizini altında
+		|__Classpath’de public/ dizini altında
+		|__ServletContext root dizini altında (src/main/webapp)
+		
+*	JSP yerine Thymeleaf, FreeMarker gibi template engine’ler kullanılırsa WAR yerine JAR ile devam edilebilir
+	JSP kullanılacaksa pom.xml de jar yerine war olmalı, sayfalar src/main/webapp altında olmalı, tomcat-embed-jasper ve jstl import edilmeli
+	src/main/webapp spring maven için web directory dir
+	WEB-INF ise JSP için web directory dir. Altında web.xml vardır ama spring boot ta web.xml gerek yok
+	
+*	Statik error pages: Örneğin, /error/500.html isimli bir sayfa HTTP 500 hata kodu üretildiğinde görüntülenecektir (src/main/resources/public/error/404.html)
+	Dynamic error pages: dinamik içerikli hata sayfaları classpath’de /templates/error dizini altında yer almalıdır (thymeleaf için)
+	
+*	Custom Servlet: 	@WebServlet(urlPatterns="/sayHelloAgain")
+	Custome filter: 	@WebFilter(urlPatterns="/*")
+	3rd Party Servlet:	@Bean  public ServletRegistrationBean helloServlet()
+	3rd Party Filter:	@Bean public FilterRegistrationBean helloFilter()
+	@ServletComponentScan
+	
+*	Şablon engines:
+	Desteklenen şablon motorları
+		|__Thymeleaf
+		|__FreeMarker
+		|__Groovy
+		|__Mustache
+	Engine settings:
+		|__spring.thymeleaf.prefix=classpath:/templates/
+		|__spring.freemarker.template-loader-path=classpath:/templates/
+		|__spring.groovy.template.resource-loader-path=classpath:/templates/
+		|__spring.mustache.prefix=classpath:/templates/
+		|__****
+		|__spring.thymeleaf.enabled=true
+		|__spring.freemarker.enabled=true
+		|__spring.groovy.template.enabled=true
+		|__spring.mustache.enabled=true
+		|__****
+		|__spring.thymeleaf.cache=true
+		|__spring.freemarker.cache=false
+		|__spring.groovy.template.cache=false
+		|__spring.mustache.cache=false
+		|__****
+		
+*	Thymeleaf
+	Eclipse -> help -> install new software -> add repository -> http://www.thymeleaf.org/eclipse-plugin-update-site
+	restart IDE
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-thymeleaf</artifactId>
+	</dependency>
+	create src/main/resources/templates folder
+	spring.thymeleaf.enabled=true ise src/main/resources/templates/owners.html
+	spring.thymeleaf.enabled=false ise src/main/webapp/webapp/WEB-INF/jsp/owners.jsp
+	
+	
+*	Cache Busting
+	Spring Boot Thymeleaf ve FreeMarker template engine’leri devreye alındığında bu filter’ı da otomatik aktive eder
+	JSP veya diğer template engine’ler için ResourceUrlEncodingFilter’ın projeye manuel biçimde dahil edilmesi gerekir
+
+	spring.resources.chain.strategy.content.enabled=true
+	spring.resources.chain.strategy.content.paths=/**
+	spring.resources.chain.strategy.fixed.enabled=true
+	spring.resources.chain.strategy.fixed.paths=/js/lib/
+	spring.resources.chain.strategy.fixed.version=v12
+
+	<link rel="stylesheet" type="text/css" th:href="@{/css/petclinic.css}"/>
+	<link rel="stylesheet" type="text/css" href="css/petclinic-2a2d595e6ed9a0b24f027f2b63b134d6.css"/>
+	
+	$.getScript('/js/lib/mymodule.js', function(){window.alert('my module loaded!');});
+	$.getScript('/v12/js/lib/mymodule.js', function(){window.alert('my module loaded!');});
+
+*	REST
+	Rest HTTP'yi uygulama düzeyi protokolü olarak kullanır
+	Soap/wsdl HTTP'yi transport protokolü olarak kullanır.
+	
+	URL: http://serverAddress:portNumber/resourcePath?queryString#fragmentId
+	
+	|__GET : Mevcut resource(lar)a erişim sağlar (SELECT)
+	|__POST : Yeni bir resource yaratır (INSERT)
+	|__PUT : Yeni bir resource yaratır veya mevcut bir resource'u günceller (INSERT/UPDATE)
+	|__DELETE : Mevcut bir resource'u siler (DELETE)
+	
+	HTTP Statü Kod Grubu 			Mesaj Kategorisi
+	1xx 							Info
+	2xx 							Success
+	3xx 							Redirect
+	4xx 							Client Error
+	5xx 							Server Error
+	
+	Anotasyonlar:
+	|__@RestController
+	|__@Controller
+	|__@RequestMapping
+	|__@PathVariable
+	|__@RequestBody
+	|__@ResponseBody
+	|__@ResponseStatus
+
+	HTTP Method				Request URI			Request Body		Response Body				HTTP Status
+	GET 					/owners 			- 					List<Owner> 				200/500
+	GET 					/owner?ln=XYZ 		- 					List<Owner> 				200/500
+	GET 					/owner/{id} 		- 					Owner 						200/404/500
+	POST 					/owner Owner 		- 					(/owner/{id} Loc Header)	201/500
+	PUT 					/owner/{id} 		Owner 				- 							200/404/500
+	DELETE 					/owner/{id} 		- 					- 							200/404/500
+	
+*	Hateoas
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-hateoas</artifactId>
+	</dependency>
+	{
+		"firstName": "Kenan",
+		"lastName": "Sevindik",
+		"_links": 
+			{
+				"self": {"href": "http://localhost:8080/owner/1"},
+				"create": {"href": "http://localhost:8080/owner"},
+				"update": {"href": "http://localhost:8080/owner/1"},
+				"delete": {"href": "http://localhost:8080/owner/1"}
+			}
+	}
+	
+*	H2 database
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-jdbc</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-data-jpa</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>com.h2database</groupId>
+		<artifactId>h2</artifactId>
+		<scope>runtime</scope>
+	</dependency>
+	
+	spring.datasource.url=jdbc:h2:tcp://localhost/~/test
+	spring.datasource.username=sa
+	spring.datasource.password=
+	spring.h2.console.enabled=true
+	spring.h2.console.path=/h2-console
+	
+	eclipse -> window -> show view -> tcp ip monitor -> show header & properties -> monitoring port:8085 host:localhost port:8080 save&start
+	http://192.168.1.106:8085/h2-console/
+	
+	ctrl+shift+T -> console (h2 olan) -> open -> right click class name -> run as -> java
+	http://192.168.1.106:8080/h2-console/
+		
+	run spring boot project
+	http://localhost:8080/h2-console
+	JDBC URL:	jdbc:h2:~/test
+	JDBC URL: 	jdbc:h2:mem:testdb
+	
+*	Connection Pool
+	|__HikariCP 		(1. öncelik)
+	|__Tomcat-Jdbc		(2. öncelik)
+	|__Commons DBCP2	(3. öncelik)
+	|__****
+	|__spring.datasource.tomcat.*
+	|__spring.datasource.hikari.*
+	|__spring.datasource.dbcp2.*
+	|__****
+	|__spring.datasource.type=org.apache.tomcat.jdbc.pool.DataSource
+	|__spring.datasource.jndi-name=java:comp/env/jdbc/TestDB
+	|__customDataSource.driverClassName=org.h2.Driver
+	|__customDataSource.url=jdbc:h2:mem:testdb
+	|__customDataSource.username=sa
+	|__customDataSource.password=
+	
+*	Database Init
+	Classpath içinde *.sql varsa otomatik çalışır	
+	|__spring.datasource.schema=classpath:/schema.sql
+	|__spring.datasource.data=classpath:/data.sql
+	|__****
+	|__schema-${platform}.sql
+	|__schema.sql
+	|__data-${platform}.sql
+	|__data.sql
+	|__ddl-auto değerine göre schema değişiklikleri
+	|__ddl-auto değeri create veya create-drop ise import.sql
+	
+*	SQL
+	Help -> Eclipse MArketPlace -> SQL Development Tools
+	
+*	JPA/Hibernate
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-data-jpa</artifactId>
+	</dependency>
+	
+	spring.jpa.generate-ddl=true
+	spring.jpa.hibernate.ddl-auto=create-drop
+	spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.H2Dialect
+	spring.jpa.properties.hibernate.show_sql=true
+	spring.jpa.properties.hibernate.format_sql=true
+	spring.jpa.properties.hibernate.use_sql_comments=true
+	spring.jpa.open-in-view=false
+	spring.jpa.properties.hibernate.enable_lazy_load_no_trans=true
+	
+	Transactions	: @Transactional(rollbackFor = Exception.class)
+					  @Transactional(propagation=Propagation.SUPPORTS,readOnly=true)
+	|__REQUIRED		: Transactional metot çağrıldığı vakit aktif transaction yoksa yeni bir transaction başlatılır
+					: Aktif transaction varsa aynı transaction içerisinde devam eder
+	|__REQUIRES_NEW	: Transactional metot çağrıldığı vakit mutlaka yeni bir transaction başlatılır
+					: Eğer aktif bir transaction varsa yeni metot sonlana kadar bekletilir
+					: Metot sonlandığı vakit yeni transaction commit/rollback yapılır, daha önce bekletilen transaction kaldığı yerden devam eder
+	|__NESTED		: REQUIRES_NEW propagation kuralına benzer
+					: Aktif bir transaction varsa yeni transaction’ı JDBC savepoint oluşturarak bu transaction üzerinden yürütür
+					: Metot sonlandığı vakit commit veya rollback, oluşturulan JDBC savepoint’e kadar gerçekleşir
+	|__SUPPORTS		: Servis metodu TX varsa TX içinde çalıştırılır
+					: TX yoksa, TX'sız çalıştırılır
+	|__NOT_SUPPORTED: TX varsa suspend edilir, servis metodu mutlaka TX’sız çalıştırılır
+	|__MANDATORY	: Servis metodu çağrıldığında TX yoksa exception fırlatılır
+	|__NEVER		: Servis metodu çağrıldığında TX varsa exception fırlatılır
+	
+*	Spring Security
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-security</artifactId>
+	</dependency>
+	
+	spring.security.user.name=user
+	spring.security.user.password=secret
+	spring.security.user.role=USER,ACTUATOR
+	
+	Aşağıdaki statik web resource path'leri public resource olarak erişilmektedir
+	|__/css/**
+	|__/js/**
+	|__/images/**
+	|__/webjars/**
+	|__/**/favicon.ico
+	
+	LOGOUT:
+	<form action="logout" method="post">
+		<input type="submit" value="Logout">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+	</form>
+	
+*	RememberMe
+	@Autowired
+	private UserDetailsService userDetailsService;
+	
+	http.rememberMe().userDetailsService(userDetailsService);
+	
+*	CustomLogin
+	http.formLogin().loginPage("/login.html").loginProcessingUrl("/login").failureUrl("/login.html?loginFailed=true");	
+	
+*	HTTPBasicAuthentatication
+	http.httpBasic();
+	
+	BasicAuthenticationInterceptor basicAuthenticationInterceptor=new BasicAuthenticationInterceptor("user","secret");
+	restTemplate.setInterceptors(Arrays.asList(basicAuthenticationInterceptor));
+	
+*	H2 security
+	http.antMatcher("/h2-console/**");
+	http.authorizeRequests().anyRequest().permitAll();
+	http.csrf().disable();
+	http.headers().frameOptions().disable();
+	
+*	JDBC UserDetailsService
+	@Autowired
+	private DataSource dataSource;
+
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+	auth.jdbcAuthentication().dataSource(dataSource);
+
+	auth.jdbcAuthentication()
+	.usersByUsernameQuery(usersByUsernameQuery)
+	.authoritiesByUsernameQuery(authoritiesByUsernameQuery)
+	.groupAuthoritiesByUsername(groupAuthoritiesByUsername)...
+	
+	users-by-username-query authorities-by-username-query group-authorities-by-username-query
+	
+*	Kriptolu Şifre
+	bcrypt, pbkdf2, scrypt, md4, sha
+	INSERT INTO USERS VALUES('user1','{bcrypt}$2a$10$0nz0StCmfnC9OGRSM0t7xOejjPO.Ytl2JzFUxp8HYubBAYtGUEAQK',TRUE);
+	INSERT INTO USERS VALUES('user4','{noop}secret',TRUE);
+
+*	WebSecurity
+	http.authorizeRequests()
+	.antMatchers(
+	"/**/favicon.ico", "/css/**", "js/**", "/images/**",
+	"/webjars/**", "/login.html").permitAll()
+	.antMatchers("/rest/**").access("hasRole('EDITOR')")
+	.antMatchers("/actuator/**").access("hasRole('ADMIN')")
+	.anyRequest().authenticated();
+
+*	UnitTest
+	<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-test</artifactId>
+	</dependency>
+	
+	@RunWith(SpringRunner.class)
+	@SpringBootTest
+	@ActiveProfiles("dev")
+	
+	@Autowired
+	private PetClinicService petClinicService;
+	List<Owner> owners = petClinicService.findOwners();
+	
+	@Autowired
+	private WebApplicationContext wac;
+	List<Owner> owners =wac.getBean(PetClinicService.class).findOwners();
+	
+	@RunWith(SpringRunner.class)
+	@SpringBootTest(properties={
+	"spring.profiles.active=dev",
+	"petclinic.display-owners-with-pets=false"})
+	
+*	TestCache (Sınıf ya da methoda uygulanır)
+	restart ApplicationContext için:
+	@DirtiesContext
+	
+*	TestIf (Sınıf ya da methoda uygulanır)
+	@IfProfileValue(name="targetPlatform",value="test")
+	-DtargetPlatform=test gibi olur
+
+*	IfProfileValue annotation değerini Abstract bir classa yazarsan extend edilen tüm classlar bu değeri alır	
+	@RunWith(SpringRunner.class)
+	@SpringBootTest
+	@ActiveProfiles("dev")
+	@IfProfileValue(name="targetPlatform",value="test")
+	public abstract class BaseIntegrationTests {	}
+	public class OwnerRepositoryTests extends BaseIntegrationTests {...}
+	
+*	MVC test
+	@RunWith(SpringRunner.class)
+	@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+	@Autowired
+	private TestRestTemplate testRestTemplate;
+	@LocalServerPort
+	private int port;
+	Owner owner = testRestTemplate.withBasicAuth("user2", "secret").getForObject("http://localhost:" + port +"/rest/owner/1", Owner.class);
+	
+	@RunWith(SpringRunner.class)
+	@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+	Owner owner = testRestTemplate.withBasicAuth("user2", "secret").getForObject("http://localhost:8080/rest/owner/1", Owner.class);
+	
+	@RunWith(SpringRunner.class)
+	@SpringBootTest(webEnvironment = WebEnvironment.MOCK)
+	@AutoConfigureMockMvc
+	public class OwnersMvcTests
+	MockHttpServletRequestBuilder requestBuilder =
+	MockMvcRequestBuilders.get("/owners");
+	ResultActions resultActions = mockMvc.perform(requestBuilder);
+	MvcResult mvcResult = resultActions.andReturn();
+	|__resultActions.andDo(MockMvcResultHandlers.print());
+	|__ModelAndView mav = mvcResult.getModelAndView();
+	|__resultActions.andExpect(MockMvcResultMatchers.view().name("owners")).andExpect(MockMvcResultMatchers.model().attributeExists("owners"));
+	
+	@Autowired
+	private MockServletContext servletContext;
+	@Autowired
+	private MockHttpSession session;
+	@Autowired
+	private MockHttpServletRequest request;
+	@Autowired
+	private MockHttpServletResponse response;
+	
+*	MockMvc
+	<dependency>
+		<groupId>org.springframework.security</groupId>
+		<artifactId>spring-security-test</artifactId>
+		<scope>test</scope>
+	</dependency>
+	@RunWith(MockitoJUnitRunner.class)
+	Mockito.when(petClinicService.getVets()).thenReturn(Arrays.asList(new Vet()));
+	mockMvc = MockMvcBuilders.standaloneSetup(petClinicController).build();
+	mockMvc.perform(MockMvcRequestBuilders.get("/vets")).andDo(MockMvcResultHandlers.print());
+	mockMvc.perform(MockMvcRequestBuilders.get("/owners").param("lastName", "Davis")).andExpect(MockMvcResultMatchers.view().name("ownersList")).andExpect(MockMvcResultMatchers.model().attributeExists("owners"));
+
+*	Metot Düzeyinde Yetkilendirme
+	@EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true, jsr250Enabled = true)
+	@Configuration
+
+	@Secured(value={"ROLE_USER","ROLE_EDITOR"})
+	@Secured("ROLE_EDITOR")
+	
+	@RolesAllowed(value={"ROLE_USER","ROLE_EDITOR"})
+	@RolesAllowed("ROLE_EDITOR")
+	
+	@PreAuthorize("hasAnyRole('ROLE_USER','ROLE_EDITOR')")
+	@PreAuthorize("hasRole('ROLE_EDITOR') andhasIpAddress(192.168.1.0/24)")
+	
+	SecurityContextHolder.clearContext();
+	
+*	Mail
+	fakesmtpserver
+	http://nilhcem.com/FakeSMTP/
+	http://www.yopmail.com/en/
+	
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-mail</artifactId>
+	</dependency>
+	
+	spring.mail.host=localhost
+	spring.mail.port=1125
+	spring.mail.properties.mail.smtp.connectiontimeout=5000
+	spring.mail.properties.mail.smtp.timeout=3000
+	spring.mail.properties.mail.smtp.writetimeout=5000
+	
+	SimpleMailMessage msg = new SimpleMailMessage();
+	msg.setFrom("me@example.com");
+	msg.setTo("you@example.com");
+	msg.setText("Hello world!");
+	javaMailSender.send(msg);
+	
+	MimeMessage message = javaMailSender.createMimeMessage();
+	MimeMessageHelper helper = new MimeMessageHelper(message);
+	helper.setFrom("me@example.com");
+	helper.setTo("test@host.com");
+	helper.setText("<html><body>Thank you!</body></html>",true);
+	javaMailSender.send(message);
+	
+	MimeMessage message = javaMailSender.createMimeMessage();
+	MimeMessageHelper helper = new MimeMessageHelper(message, true);
+	helper.setFrom("me@example.com");
+	helper.setTo("test@host.com");
+	helper.setText("<html><body>Thank you!</body></html>",true);
+	FileSystemResource file = new FileSystemResource(
+	new File("c:/profile.jpg"));
+	helper.addAttachment("profile.jpg", file);
+	javaMailSender.send(message);
+
+*	JPA
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-data-jpa</artifactId>
+	</dependency>
+
+*	JPA Auditing
+	@EntityListeners(AuditingEntityListener.class)
+	@CreatedBy
+	@CreatedDate
+	@LastModifiedBy
+	@LastModifiedDate
+	
+	@MappedSuperclass
+	BaseEntity
+	
+	@EnableJpaAuditing
+	@SpringBootApplication
+	
+	@EnableJpaAuditing(auditorAwareRef="customAuditorAware")
+	
+*	Data REST
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-data-rest</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework.data</groupId>
+		<artifactId>spring-data-rest-hal-browser</artifactId>
+	</dependency>	
+	
+	spring.data.rest.base-path=/rest
+	
+	public interface VetRepository extends JpaRepository<Vet, Long> {}
+	http://localhost:8080/vets
+	
+NOT: 
+	@Repository("ownerRepository") hangisinde ise o çalışıyor
+	OwnerRepositoryJpaImpl
+	OwnerRepositoryJdbcImpl
+	OwnerRepositoryInMemoryImpl
+	
+NOT: sec tag, thymeleaf-extra
+	@Bean
+	public SpringTemplateEngine thymeleafTemplateEngine()
+	{
+		SpringTemplateEngine templateEngine=new SpringTemplateEngine();
+		templateEngine.setTemplateResolver(thymeleafTemplateResolver());
+		templateEngine.setEnableSpringELCompiler(true);
+		templateEngine.addDialect(new SpringSecurityDialect());
+		return templateEngine;
+	}
+
+NOT:
+	insert – inserts content inside the tag
+	replace – replaces the current tag with the tag defining the fragment
+	include – this is deprecated but it may still appear in a legacy code
+	
+NOT: 
+	eclipse -> window -> show view -> tcp ip monitor -> show header & properties -> monitoring port:8085 host:localhost port:8080 save&start
+	http://192.168.1.106:8085/h2-console/
+	
+	ctrl+shift+T -> console (h2 olan) -> open -> right click class name -> run as -> java
+	http://192.168.1.106:8080/h2-console/
+		
+	run spring boot project
+	http://localhost:8080/h2-console
+	JDBC URL:	jdbc:h2:~/test
+	JDBC URL: 	jdbc:h2:mem:testdb
+	
+	("/h2-console","/h2-console/*","/h2-console/**").access("hasRole('ADMIN')").anyRequest()
+	spring.h2.console.settings.web-allow-others=true
+	
+NOT: set methodları autowired olmalı
+		com.springboot.mywebapp.dao				public 	interface 	UserRepository
+		com.springboot.mywebapp.dao.impl		@Repository("userRepository")	public class UserRepositoryJpaImpl implements UserRepository
+		com.springboot.mywebapp.service			public	interface 	UserService
+		com.springboot.mywebapp.service.impl	@Service						public	class	UserServiceImpl 	implements 	UserService
+												private UserRepository userRepository;
+												@Autowired						public void setUserRepository(UserRepository userRepository)
+												
+NOT: RepositoryJdbc için DB name kullan > select * from DB_USERS 
+	 RepositoryJpa için db class name kullan > from User
+	 
+	 Aşağıdaki ile uygun repository seçilir
+	 //@Primary 
+	 @Repository("userRepository")
+	 
+NOT:
+	@RequestMapping(value="/register",method=RequestMethod.GET)
+	public ModelAndView registerTh()
+	{
+		com.springboot.mywebapp.model.User user=new com.springboot.mywebapp.model.User();
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("user",user);
+		mav.setViewName("th_register");
+		return mav;
+	}	
+	@RequestMapping(value="/save",method=RequestMethod.POST)
+	public ModelAndView saveTh(@ModelAttribute(value="user") com.springboot.mywebapp.model.User user)
+	{
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("user",user);
+		mav.setViewName("th_register");
+		return mav;
+	}
+	
+	<form action="#" th:action="@{/save}" th:object="${user}" method="post">
+		<input type="text" th:field="*{username}" />
+		<input type="submit" />
+	</form>
+	<form action="#" th:action="@{/save}" th:object="${user}" method="post">
+		<input type="text" th:field="*{username}" />
+		<button type="submit" th:text="#{register.title}"></button>
+	</form>
+
+NOT:
+	${deflangimagepath}                 				: modelandview
+	${@languageService.getLanguages()}					: bean
+	#{register.enterpassword}							: message
+	${#request.getParameter('loginFailed') == 'true'}
+	${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}
+	${session.sessionattribute_save_has_error}
+	#{'recaptcha.message.'+${recaptchamessage}}
+	${...} : Variable expressions.
+	*{...} : Selection expressions.
+	#{...} : Message (i18n) expressions.
+	@{...} : Link (URL) expressions.
+	~{...} : Fragment expressions.
+	
+	session.setAttribute("sessionattribute_save_error_status",-1); // 0:empty -1:error 1:success
+	session.setAttribute("sessionattribute_save_error_message","Şifreleri farklı girdiniz ...");
+	
+	<div th:if="${session.sessionattribute_save_error_status} == '-1' " style="color: red; margin: 10px 0px;">
+		<div class="alert alert-danger" role="alert">
+			<span th:utext="${session.sessionattribute_save_error_message}"> Static summary </span>
+		</div>
+	</div>
+	
+NOT: 
+	LOG:
+	Logger.getGlobal().info("");
+	
+NOT: 
+	recaptcha
+	RecaptchaService.java
+	<script src="https://www.google.com/recaptcha/api.js"></script>
+	<div th:if="${recaptchamessage} != null " style="color: red; margin: 10px 30%; width: 40%">
+		<div class="alert alert-danger" role="alert" style="font-size: 12px;">
+			<span th:text="#{'recaptcha.message.'+${recaptchamessage}}"></span>
+		</div>
+	</div>
+	
+NOT:
+	//AUTO LOGIN
+	UserDetails userDetails=customUserDetailsService.loadUserByUsername(user.getUsername());
+	UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(userDetails,userDetails.getPassword(),userDetails.getAuthorities());
+	SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+	
+NOT: 
+	REST:
+	com.springboot.mywebapp/SecurityConfiguration_Rest
+	com.springboot.mywebapp.rest/RestControllerUser
+		ResponseEntity.status(HttpStatus.CONFLICT).build();
+		ResponseEntity.created(new URI("/user/"+newUser.getUserId())).build();
+		ResponseEntity.ok(users);
+		ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		ResponseEntity.status(HttpStatus.CONFLICT).build();
+		ResponseEntity.noContent().build();
+		ResponseEntity.notFound().build();
+	
+	
+###########################################
+Eclipse Pluginss
+++http://www.mihai-nita.net/eclipse
+++http://download.eclipse.org/egit/updates
+--http://download.eclipse.org/egit/updates-nightly/
+++http://www.thymeleaf.org/eclipse-plugin-update-site
+ 
+DTP-Data Tools Platform
+++https://ci.eclipse.org/datatools/job/org.eclipse.datatools_master/lastSuccessfulBuild/artifact/site/target/site.zip
+http://mirrors.ibiblio.org/eclipse/datatools/1.14.1.201712071719/dtp-repository-1.14.1.201712071719.zip
+https://www.eclipse.org/datatools/downloads.php
+###########################################
+<div th:switch="${user.role}"> 
+  <p th:case="'admin'">User is an administrator</p>
+  <p th:case="#{roles.manager}">User is a manager</p>
+  <p th:case="*">User is some other thing</p> 
+</div>
+
+<div th:if="${customer.anonymous}">   		<div>Welcome, Guest</div>										</div>
+<!-- ELSE -->
+<div th:unless="${customer.anonymous}">	    <div th:text=" 'Hi,' + ${customer.name}">Hi, User</div>			</div>
+
+<div th:switch="${#authentication}? ${#authorization.expression('isAuthenticated()')} : ${false}">
+    <span th:case="${false}">User is not logged in</span>
+    <span th:case="${true}">Logged in user</span>
+    <span th:case="*">Should never happen, but who knows...</span>
+</div>
+
+<div sec:authorize="isAuthenticated()">		 This content is only shown to authenticated users.	</div>
+<div sec:authorize="hasRole('ROLE_ADMIN')">  This content is only shown to administrators.		</div>
+<div sec:authorize="hasRole('ROLE_USER')">   This content is only shown to users.  				</div>
+
+<tr th:each="student: ${students}">	  <td th:text="${student.id}" />	        					<td th:text="${student.name}" />					</tr>
+
+<td>	<span th:if="${student.gender} == 'M'" th:text="Male" /> 	    <span th:unless="${student.gender} == 'M'" th:text="Female" />	</td>
+
+<td th:switch="${student.gender}">    <span th:case="'M'" th:text="Male" />     					<span th:case="'F'" th:text="Female" />				</td>
+
+<tr th:each="student: ${students}">		<td th:text="${{student.name}}" />	</tr>
+<ul>    <li th:each="err : ${#fields.errors('id')}" th:text="${err}" /> 	   <li th:each="err : ${#fields.errors('name')}" th:text="${err}" />		</ul>
+<ul>    <li th:each="err : ${#fields.errors('*')}" th:text="${err}" />		</ul>
+<ul>    <li th:each="err : ${#fields.errors('all')}" th:text="${err}" />	</ul>
+<ul>    <li th:each="err : ${#fields.errors('global')}" th:text="${err}" />	</ul>
+<ul>    <li th:errors="*{id}" />	    <li th:errors="*{name}" />			</ul>
+
+th:attr="data-placeholder=#{login.enterusername}"
+<div th:text="#{test.locale.msg}">
+<title th:text="#{test.locale.msg}"></title>
+<p th:if="${loginFailed}" class="error">Login Failed, Incorrect Username or Password</p>
+<option th:each="language : ${languages}" th:value="${language.localeName}" th:text="${language.displayName}"></option>
+<div th:if="${status}" th:text="${status}" th:class="${'alert ' + alertClass}"/>
+
+<link rel="stylesheet" type="text/css" th:href="@{/particles/css/style.css}" />
+<script th:src="@{|/particles/js/particles.js?v=${#dates.createNow()}|}"></script>
+<form action="#" th:action="@{/saveStudent}" th:object="${student}" method="post">
+
+Logged user: <span sec:authentication="name">Bob</span>
+Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+###########################################
+create repository on github, private and initialize
+empty projectdir
+copy github repo link
+eclipse->git repositories->ctrl+v->directory=projectdir
+fill projectdir->right click repositories and push
+
+
+###########################################
+<span th:if="${isRaining or isCold}">The weather is bad</span>
+<span th:if="${isRaining} or ${isCold}">The weather is bad</span>
+<span th:if="${isSunny and isWarm}">The weather is good</span>
+<span th:if="${isSunny} and ${isWarm}">The weather is good</span>
+<span th:if="${not isCold}">It's warm</span>
+<span th:if="${!isCold}">It's warm</span>
+<span th:if="not ${isCold}">It's warm</span>
+<span th:if="!${isCold}">It's warm</span>
+###########################################
+#bools.isTrue(obj) returns whether the argument is evaluated to true
+#bools.isFalse(obj) returns whether the argument is evaluated to false
+#bools.xxxIsTrue(collection) converts the elements of the argument to booleans with #bools.isTrue() then collects them to the same type of collection
+#bools.xxxIsFalse(collection) converts the elements of the argument to booleans with #bools.isFalse() then collects them to the same type of collection
+#bools.xxxAnd(collection) returns true if all elements in the argument is evaluated to true
+#bools.xxxOr(collection) returns true if any element in the argument is evaluated to true
+###########################################
+RELOADEBLE PROPERTIES
+spring.devtools.restart.enabled=true
+spring.devtools.livereload.enabled=true
+spring.devtools.restart.trigger-file=./config/abasconfig.properties
+SpringBootAppStarter.restart();
+SpringBootAppStarter.refresh();
+spring-cloud-context
+http://localhost:9034/admin/actuator/restart
+refreshEndpoint.refresh();
+restartEndpoint.restart();
+Thread restartThread = new Thread(() -> restartEndpoint.restart());
+restartThread.setDaemon(false);
+restartThread.start();
+
+<configuration>
+					<excludeDevtools>false</excludeDevtools>
+				</configuration>
+###########################################
+BANNER
+banner.txt    (ANSI Shadow font)
+http://patorjk.com/software/taag/#p=display&f=Whimsy&t=Abas%0AMobile
+https://www.baeldung.com/spring-boot-custom-banners
+https://devops.datenkollektiv.de/banner.txt/index.html
+
+#spring.banner.location=classpath:/config/banner.txt
+spring.banner.image.location=classpath:/config/abas.gif
+spring.banner.image.width=  100
+spring.banner.image.height= 50
+spring.banner.image.margin= 10
+spring.banner.image.invert= false
+spring.output.ansi.enabled=detect 
+###########################################
+webfont-eot_svg_ttf_woff_woff2
+www.fontsquirrel.comtoolswebfont-generator

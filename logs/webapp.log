@@ -1,0 +1,171 @@
+2020-09-11 18:09:53.878 [restartedMain] INFO  com.my.binance.SpringBootAppStarter - No active profile set, falling back to default profiles: default
+2020-09-11 18:09:54.461 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-09-11 18:09:54.480 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 18ms. Found 1 JPA repository interfaces.
+2020-09-11 18:09:54.588 [restartedMain] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=4e9e60e4-7a6b-304e-94a7-8eb1b8080cb6
+2020-09-11 18:09:54.639 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@6365e626' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-09-11 18:09:54.646 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-09-11 18:09:54.906 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9034 (http)
+2020-09-11 18:09:54.907 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2020-09-11 18:09:54.907 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.36]
+2020-09-11 18:09:55.000 [restartedMain] INFO  org.apache.jasper.servlet.TldScanner - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-09-11 18:09:55.002 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2020-09-11 18:09:55.002 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1119 ms
+2020-09-11 18:09:55.073 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Starting...
+2020-09-11 18:09:59.647 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Start completed.
+2020-09-11 18:09:59.650 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/admin/h2-console'. Database available at 'jdbc:h2:file:./db/binancedb'
+2020-09-11 18:09:59.751 [restartedMain] INFO  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: f1dadcd8-afcf-4310-b5b5-10146693622b
+
+2020-09-11 18:09:59.783 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ USERINFO: admin:[ADMIN]
+2020-09-11 18:09:59.871 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ USERINFO: admin1:[ADMIN]
+2020-09-11 18:09:59.960 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ USERINFO: rest:[RESTUSER]
+2020-09-11 18:10:00.062 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ USERINFO: rest1:[RESTUSER]
+2020-09-11 18:10:00.153 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ USERINFO: webuser:[WEBUSER]
+2020-09-11 18:10:00.242 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ USERINFO: webuser1:[WEBUSER]
+2020-09-11 18:10:00.335 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ SecurityConfiguration class init completed: 0
+2020-09-11 18:10:00.375 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2020-09-11 18:10:00.420 [restartedMain] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-09-11 18:10:00.430 [restartedMain] INFO  o.s.s.c.ThreadPoolTaskScheduler - Initializing ExecutorService 'taskScheduler'
+2020-09-11 18:10:00.440 [task-1] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-09-11 18:10:00.447 [task-1] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2020-09-11 18:10:00.492 [task-1] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-09-11 18:10:00.492 [task-1] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-09-11 18:10:00.529 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-09-11 18:10:00.764 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ abas.edp.password		= *****
+2020-09-11 18:10:00.765 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ abas.edp.port			= 6550
+2020-09-11 18:10:00.765 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ abas.edp.sessiontimeout			= 5000
+2020-09-11 18:10:00.765 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ abas.edp.serverip		= 10.0.0.100
+2020-09-11 18:10:00.765 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ abas.edp.fopmode			= false
+2020-09-11 18:10:00.765 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ abas.edp.fl			= true
+2020-09-11 18:10:00.765 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ abas.s3.dir			= /u/abas/s3
+2020-09-11 18:10:00.765 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ abas.s3.basedir			= /u/abas
+2020-09-11 18:10:00.765 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ abas.s3.mandant			= gelistirme
+2020-09-11 18:10:00.765 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ spring.mvc.locale		= tr_TR
+2020-09-11 18:10:00.765 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ server.port			= 9034
+2020-09-11 18:10:00.765 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ server.connection-timeout	= 30m
+2020-09-11 18:10:00.765 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ server.token.expirationtime	= 43200000
+2020-09-11 18:10:00.765 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ server.token.headerstring	= Authorization
+2020-09-11 18:10:00.765 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ server.token.secret	= AbasTalent
+2020-09-11 18:10:00.765 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ server.token.prefix	= Bearer 
+2020-09-11 18:10:00.765 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ server.servlet.session.timeout	= 30m
+2020-09-11 18:10:00.824 [restartedMain] WARN  o.s.d.r.webmvc.halbrowser.HalBrowser - ---
+2020-09-11 18:10:00.824 [restartedMain] WARN  o.s.d.r.webmvc.halbrowser.HalBrowser - Spring Data REST HAL Browser is deprecated! Prefer the HAL Explorer (artifactId: spring-data-rest-hal-explorer)!
+2020-09-11 18:10:00.824 [restartedMain] WARN  o.s.d.r.webmvc.halbrowser.HalBrowser - ---
+2020-09-11 18:10:00.932 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/rest/**'], [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@25af6221, org.springframework.security.web.context.SecurityContextPersistenceFilter@7a79d07e, org.springframework.security.web.header.HeaderWriterFilter@73c56fe8, org.springframework.security.web.authentication.logout.LogoutFilter@135a72e0, com.my.binance.security.JWTAuthenticationFilter@1cbb270a, com.my.binance.security.JWTAuthorizationFilter@776d65f4, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@3f691e61, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@36e4c2e8, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6e8641f3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@f76e, org.springframework.security.web.session.SessionManagementFilter@61851bd4, org.springframework.security.web.access.ExceptionTranslationFilter@4371f405, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2599c485]
+2020-09-11 18:10:00.935 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/admin/h2-console/*'], [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6fc351ca, org.springframework.security.web.context.SecurityContextPersistenceFilter@37764325, org.springframework.security.web.header.HeaderWriterFilter@5fe296e1, org.springframework.security.web.authentication.logout.LogoutFilter@45ca28e8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1437fb40, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5fa932b9, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6a643b8e, org.springframework.security.web.session.SessionManagementFilter@720db365, org.springframework.security.web.access.ExceptionTranslationFilter@4474c7, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@369a96bd]
+2020-09-11 18:10:00.948 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/**'], [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@66bc1642, org.springframework.security.web.context.SecurityContextPersistenceFilter@39f25d93, org.springframework.security.web.header.HeaderWriterFilter@5e53c831, org.springframework.web.filter.CharacterEncodingFilter@2cb4ef5e, org.springframework.security.web.authentication.logout.LogoutFilter@2b1a6e2a, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@2bfd0eb6, org.springframework.security.web.session.ConcurrentSessionFilter@6907a350, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@792018dc, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@54668186, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@55ed6b84, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6f7fdcc0, org.springframework.security.web.session.SessionManagementFilter@36c36503, org.springframework.security.web.access.ExceptionTranslationFilter@73d47e35, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@f9577c]
+2020-09-11 18:10:01.063 [restartedMain] WARN  o.t.templatemode.TemplateMode - [THYMELEAF][restartedMain] Template Mode 'HTML5' is deprecated. Using Template Mode 'HTML' instead.
+2020-09-11 18:10:04.269 [restartedMain] INFO  o.s.cloud.commons.util.InetUtils - Cannot determine local hostname
+2020-09-11 18:10:04.291 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 20 endpoint(s) beneath base path '/admin/actuator'
+2020-09-11 18:10:04.325 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ application initialization completed
+2020-09-11 18:10:04.366 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 9034 (http) with context path ''
+2020-09-11 18:10:06.993 [restartedMain] INFO  o.s.cloud.commons.util.InetUtils - Cannot determine local hostname
+2020-09-11 18:10:06.994 [restartedMain] INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories…
+2020-09-11 18:10:07.018 [restartedMain] INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized!
+2020-09-11 18:10:07.030 [restartedMain] INFO  com.my.binance.SpringBootAppStarter - Started SpringBootAppStarter in 18.555 seconds (JVM running for 1463.75)
+2020-09-11 18:10:07.035 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation delta:
+
+
+==========================
+CONDITION EVALUATION DELTA
+==========================
+
+
+Positive matches:
+-----------------
+
+   LogFileWebEndpointAutoConfiguration#logFileWebEndpoint matched:
+      - Log File found logging.file.name ./logs/webapp.log (LogFileWebEndpointAutoConfiguration.LogFileCondition)
+      - @ConditionalOnMissingBean (types: org.springframework.boot.actuate.logging.LogFileWebEndpoint; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+
+Negative matches:
+-----------------
+
+    None
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+    None
+
+
+
+2020-09-11 18:11:19.472 [Thread-1987] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-09-11 18:11:19.472 [Thread-1987] INFO  o.s.s.c.ThreadPoolTaskScheduler - Shutting down ExecutorService 'taskScheduler'
+2020-09-11 18:11:19.472 [Thread-1987] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-09-11 18:11:19.472 [Thread-1987] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Shutdown initiated...
+2020-09-11 18:11:20.334 [Thread-1987] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Shutdown completed.
+2020-09-11 18:11:27.289 [restartedMain] INFO  com.my.binance.SpringBootAppStarter - No active profile set, falling back to default profiles: default
+2020-09-11 18:11:27.897 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-09-11 18:11:27.912 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 23ms. Found 1 JPA repository interfaces.
+2020-09-11 18:11:28.021 [restartedMain] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=4e9e60e4-7a6b-304e-94a7-8eb1b8080cb6
+2020-09-11 18:11:28.101 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@b78d501' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-09-11 18:11:28.101 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-09-11 18:11:28.390 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9034 (http)
+2020-09-11 18:11:28.390 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2020-09-11 18:11:28.390 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.36]
+2020-09-11 18:11:28.484 [restartedMain] INFO  org.apache.jasper.servlet.TldScanner - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-09-11 18:11:28.500 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2020-09-11 18:11:28.500 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1211 ms
+2020-09-11 18:11:28.562 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-6 - Starting...
+2020-09-11 18:11:33.140 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-6 - Start completed.
+2020-09-11 18:11:33.140 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/admin/h2-console'. Database available at 'jdbc:h2:file:./db/binancedb'
+2020-09-11 18:11:33.202 [restartedMain] INFO  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: fe8704a5-1076-4c34-ae9c-e422440f4884
+
+2020-09-11 18:11:33.234 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ USERINFO: admin:[ADMIN]
+2020-09-11 18:11:33.312 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ USERINFO: admin1:[ADMIN]
+2020-09-11 18:11:33.405 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ USERINFO: rest:[RESTUSER]
+2020-09-11 18:11:33.484 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ USERINFO: rest1:[RESTUSER]
+2020-09-11 18:11:33.577 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ USERINFO: webuser:[WEBUSER]
+2020-09-11 18:11:33.671 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ USERINFO: webuser1:[WEBUSER]
+2020-09-11 18:11:33.780 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ SecurityConfiguration class init completed: 0
+2020-09-11 18:11:33.827 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2020-09-11 18:11:33.874 [restartedMain] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-09-11 18:11:33.890 [restartedMain] INFO  o.s.s.c.ThreadPoolTaskScheduler - Initializing ExecutorService 'taskScheduler'
+2020-09-11 18:11:33.905 [task-1] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-09-11 18:11:33.905 [task-1] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2020-09-11 18:11:33.952 [task-1] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-09-11 18:11:33.952 [task-1] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-09-11 18:11:34.000 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-09-11 18:11:34.180 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ abas.edp.password		= *****
+2020-09-11 18:11:34.180 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ abas.edp.port			= 6550
+2020-09-11 18:11:34.180 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ abas.edp.sessiontimeout			= 5000
+2020-09-11 18:11:34.180 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ abas.edp.serverip		= 10.0.0.100
+2020-09-11 18:11:34.180 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ abas.edp.fopmode			= false
+2020-09-11 18:11:34.180 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ abas.edp.fl			= true
+2020-09-11 18:11:34.180 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ abas.s3.dir			= /u/abas/s3
+2020-09-11 18:11:34.180 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ abas.s3.basedir			= /u/abas
+2020-09-11 18:11:34.180 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ abas.s3.mandant			= gelistirme
+2020-09-11 18:11:34.180 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ spring.mvc.locale		= tr_TR
+2020-09-11 18:11:34.180 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ server.port			= 9034
+2020-09-11 18:11:34.181 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ server.connection-timeout	= 30m
+2020-09-11 18:11:34.181 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ server.token.expirationtime	= 43200000
+2020-09-11 18:11:34.181 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ server.token.headerstring	= Authorization
+2020-09-11 18:11:34.181 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ server.token.secret	= AbasTalent
+2020-09-11 18:11:34.181 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ server.token.prefix	= Bearer 
+2020-09-11 18:11:34.181 [restartedMain] INFO  c.m.b.SprinBootAppConfiguration - @@@ server.servlet.session.timeout	= 30m
+2020-09-11 18:11:34.221 [restartedMain] WARN  o.s.d.r.webmvc.halbrowser.HalBrowser - ---
+2020-09-11 18:11:34.221 [restartedMain] WARN  o.s.d.r.webmvc.halbrowser.HalBrowser - Spring Data REST HAL Browser is deprecated! Prefer the HAL Explorer (artifactId: spring-data-rest-hal-explorer)!
+2020-09-11 18:11:34.222 [restartedMain] WARN  o.s.d.r.webmvc.halbrowser.HalBrowser - ---
+2020-09-11 18:11:34.280 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/rest/**'], [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@854936b, org.springframework.security.web.context.SecurityContextPersistenceFilter@638300e4, org.springframework.security.web.header.HeaderWriterFilter@76455941, org.springframework.security.web.authentication.logout.LogoutFilter@b926bf5, com.my.binance.security.JWTAuthenticationFilter@d370925, com.my.binance.security.JWTAuthorizationFilter@148f2721, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@5ea381e2, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6b9741b0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@374482d2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@566108c3, org.springframework.security.web.session.SessionManagementFilter@7d77432d, org.springframework.security.web.access.ExceptionTranslationFilter@135379f5, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1a507e3c]
+2020-09-11 18:11:34.282 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/admin/h2-console/*'], [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@565bebde, org.springframework.security.web.context.SecurityContextPersistenceFilter@27db5721, org.springframework.security.web.header.HeaderWriterFilter@163623c1, org.springframework.security.web.authentication.logout.LogoutFilter@2794ab5d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4bf095a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@23300a27, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@35593ca6, org.springframework.security.web.session.SessionManagementFilter@134d41f2, org.springframework.security.web.access.ExceptionTranslationFilter@7cebf59d, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2bf9d2f4]
+2020-09-11 18:11:34.291 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/**'], [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4a5e60c2, org.springframework.security.web.context.SecurityContextPersistenceFilter@b750f2e, org.springframework.security.web.header.HeaderWriterFilter@7aac496a, org.springframework.web.filter.CharacterEncodingFilter@7863408e, org.springframework.security.web.authentication.logout.LogoutFilter@10ae7211, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1a29018f, org.springframework.security.web.session.ConcurrentSessionFilter@28db9c20, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@130ae033, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@474fb965, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@2981aa63, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2a141374, org.springframework.security.web.session.SessionManagementFilter@658622fd, org.springframework.security.web.access.ExceptionTranslationFilter@2c51eb8e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@637a3eb1]
+2020-09-11 18:11:34.371 [restartedMain] WARN  o.t.templatemode.TemplateMode - [THYMELEAF][restartedMain] Template Mode 'HTML5' is deprecated. Using Template Mode 'HTML' instead.
+2020-09-11 18:11:37.210 [restartedMain] INFO  o.s.cloud.commons.util.InetUtils - Cannot determine local hostname
+2020-09-11 18:11:37.619 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'configClientProperties' defined in class path resource [org/springframework/cloud/config/client/ConfigClientAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.cloud.config.client.ConfigClientProperties]: Factory method 'configClientProperties' threw exception; nested exception is java.lang.IllegalStateException: org.springframework.context.annotation.AnnotationConfigApplicationContext@77349179 has been closed already
+2020-09-11 18:11:37.619 [restartedMain] WARN  o.s.b.f.s.DisposableBeanAdapter - Invocation of destroy method failed on bean with name 'tomcatMetricsBinder': java.lang.NullPointerException
+2020-09-11 18:11:37.620 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-09-11 18:11:37.620 [restartedMain] INFO  o.s.s.c.ThreadPoolTaskScheduler - Shutting down ExecutorService 'taskScheduler'
+2020-09-11 18:11:37.621 [restartedMain] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-09-11 18:11:37.621 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-6 - Shutdown initiated...

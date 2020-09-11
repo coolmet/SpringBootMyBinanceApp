@@ -3,21 +3,23 @@
 <head>
 <meta charset="UTF-8" />
 <title>Login</title>
+
+		
+
 </head>
 <body>
-	<h1>Login Page</h1>
+
+	<h1 th:text="#{login.pagetitle}"></h1>
 	<form action="login" method="post">
-		Username:
-		<input name="username" type="text" />
+		<label th:text="#{login.label.username} + ':'"></label>		<input name="username" type="text" />
 		<br />
-		Password:
-		<input name="password" type="password" />
+		<label th:text="#{login.label.password} + ':'"></label>		<input name="password" type="password" />
 		<br />
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-		Remember Me:
-		<input name="remember-me" type="checkbox">
+		<label th:text="#{login.label.rememberme} + ':'"></label>	<input name="remember-me" type="checkbox">
 		<br />
-		<input type="submit" value="Login">
+		<button id="update" type="submit" th:text="#{login.button.submit}"></button>
+		
 	</form>
 	<div th:if="${#request.getParameter('loginFailed') == 'true'}" style="color: red; margin: 10px 0px;">
 		<div class="alert alert-danger" role="alert">

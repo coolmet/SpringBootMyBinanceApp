@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.my.binance.HttpSessionConfig;
 import com.my.binance.SprinBootAppConfiguration;
+import com.my.binance.service.LanguageService;
 
 @Controller
 public class WebLinkController
@@ -37,8 +38,12 @@ public class WebLinkController
 	// http://localhost:9034/admin/whreceipt2
 	// http://localhost:9034/admin/activesessions2
 	// http://localhost:9034/rest/get/json/all
+	// http://localhost:9034/?lang=en
 	
 	Logger LOGGER=LoggerFactory.getLogger(SprinBootAppConfiguration.class);
+	
+	@Autowired
+	private LanguageService languageService;
 	
 	@Autowired
 	private SessionRegistry sessionRegistry;
@@ -91,16 +96,17 @@ public class WebLinkController
 		}
 		else if(request.isUserInRole("ROLE_WEBUSER"))
 		{
-			return "redirect:/web/binance/main";
+			return "redirect:/web/binance";
 		}
 		return "redirect:/";
 	}
 	
 	@RequestMapping(value=
-	{"/web/binance/main"})
+	{"/web/binance"})
 	public ModelAndView webbinancemain()
 	{
 		ModelAndView mav=new ModelAndView();
+		mav.addObject("deflangimagepath",languageService.getLanguageImagePathByLocaleName(LocaleContextHolder.getLocale().getLanguage()));
 		mav.setViewName("th_binance_main");
 		return mav;
 	}

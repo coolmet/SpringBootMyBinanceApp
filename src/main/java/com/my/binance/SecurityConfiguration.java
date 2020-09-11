@@ -101,6 +101,28 @@ public class SecurityConfiguration
 	}
 	
 	@Configuration
+	@Order(2)
+	class SecurityConfiguration_H2 extends WebSecurityConfigurerAdapter
+	{
+		@Override
+		protected void configure(HttpSecurity http) throws Exception
+		{
+			// http.authorizeRequests().antMatchers("/admin/h2-console","/admin/h2-console/*","/admin/h2-console/**","/**/admin/h2-console/**").permitAll();
+			
+			http.antMatcher("/admin/h2-console/*")
+			    .authorizeRequests()
+			    .antMatchers("/admin/h2-console","/admin/h2-console/*","/admin/h2-console/**","/**/admin/h2-console/**")
+			    .access("hasRole('ADMIN')")
+			    .anyRequest()
+			    .authenticated();
+			
+			http.csrf().disable();
+			// http.headers().frameOptions().sameOrigin();
+			http.headers().frameOptions().disable();
+		}
+	}
+	
+	@Configuration
 	class THSecurity extends WebSecurityConfigurerAdapter
 	{
 		

@@ -1,0 +1,62 @@
+{
+	"info": {
+		"_postman_id": "795f3718-e68d-4a86-8180-93ab84fcc2c9",
+		"name": "SpringBootMyBinanceApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:9034/rest/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"UserName\":\"rest\", \"Password\":\"rest\"}"
+				},
+				"url": {
+					"raw": "http://localhost:9034/rest/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9034",
+					"path": [
+						"rest",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9034/rest/get/json/all",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyZXN0XlJPTEVfUkVTVFVTRVIiLCJpYXQiOjE1OTkzMzg2NDksImV4cCI6MTU5OTM4MTg0OX0.OiLeVuWKsrZQvdSpN6IIfOUOqPybZVSq1mluFqypC12aL51-3JOfzL8isVmllJyoxuIkfInt1Hf6KoJWnl9eWQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9034/rest/get/json/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9034",
+					"path": [
+						"rest",
+						"get",
+						"json",
+						"all"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

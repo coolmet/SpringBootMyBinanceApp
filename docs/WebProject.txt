@@ -1,0 +1,62 @@
+1-	project -> new -> maven project -> use default workspace location + create a simple project 
+			pom.xml
+				|__group id		:	com.springboot
+				|__artifact id	:	SprinBootDemo
+				|__packaking	:	jar
+				|__<optional>	:	true ise sadece geliştirme ortamında devreye alınacak
+			Edit pom.xml
+			project -> rightclick -> Maven -> Update project
+				|__console -> maven console
+				
+2-	Close eclipse project, rename as SprinBootDemo__
+	
+3-	Github create project -> https://github.com/coolmet
+		Eclipse
+			Git Repositories view page -> Clone a git repository -> Directory: D:\PROJE\sts\SprinBootDemo
+			
+4-	copy SprinBootDemo__/* to SprinBootDemo/
+	
+5-	Open eclipse project -> rightclick -> team -> commit -> add unstaged changes -> commit and push
+
+		create class	: src/main/java		: com.my.binance.SpringBootAppStarter
+		create folder	: src/main/resources: config
+		create file		: src/main/resources: config/logconfig.yml
+		create file		: src/main/resources: config/webserverconfig.properties
+		create file		: src/main/resources: config/appconfig.properties
+		create file		: src/main/resources: config/banner.txt
+		create file		: src/main/resources: public/error
+		create file		: src/main/resources: thymeleaf
+		create class	: src/main/java		: com.my.binance.UserListConfigProperties
+		create class	: src/main/java		: com.my.binance.AbstractSecurityConfiguration
+		create class	: src/main/java		: com.my.binance.ConfigPropertiesReloadeble
+		create class	: src/main/java		: com.my.binance.SprinBootAppConfiguration
+		create class	: src/main/java		: com.my.binance.ConfigPropertiesApp
+		create class	: src/main/java		: com.my.binance.ConfigPropertiesSpring
+		create class	: src/main/java		: com.my.binance.ConfigPropertiesServer
+		create class	: src/main/java		: com.my.binance.HttpSessionConfig
+		create class	: src/main/java		: com.my.binance.ShutdownConfig
+		create class	: src/main/java		: com.my.binance.ShutdownConfigTerminateBean
+		create class	: src/main/java		: com.my.binance.model.UserDetailsModel
+		create class	: src/main/java		: com.my.binance.model.impl.UserDetailsModelImpl
+		create class	: src/main/java		: com.my.binance.model.ClsOrder
+		create class	: src/main/java		: com.my.binance.model.User
+		create class	: src/main/java		: com.my.binance.model.ExecResult
+		create class	: src/main/java		: com.my.binance.service.ReloadablePropertiesService
+		create class	: src/main/java		: com.my.binance.service.UserService
+		create class	: src/main/java		: com.my.binance.service.AppUtils
+		create class	: src/main/java		: com.my.binance.service.TokenService
+		create class	: src/main/java		: com.my.binance.service.ClsService
+		create class	: src/main/java		: com.my.binance.service.ClsSessionService
+		create class	: src/main/java		: com.my.binance.service.impl.ClsServiceImpl
+		create class	: src/main/java		: com.my.binance.service.impl.UserServiceImpl
+		create class	: src/main/java		: com.my.binance.security.JWTAuthenticationFilter
+		create class	: src/main/java		: com.my.binance.security.JWTAuthorizationFilter
+		create class	: src/main/java		: com.my.binance.rest.RestControllers
+		create class	: src/main/java		: com.my.binance.rest.UserList
+		create class	: src/main/java		: com.my.binance.web.WebLinkController
+		
+		
+		
+		
+		
+		

@@ -1,0 +1,48 @@
+http://www.sitekodlari.com/resimrenkkodu.php
+https://www.iconscreator.com/Application_Restart-Edit.htm
+https://www.iconscreator.com/Mobile-Application_Logout-Edit.htm
+
+renkkodu: #5CBBD1
+
+
+Lang:
+	fragments/languagelower.html
+		FULL
+	headernawbar.html
+		<link rel="stylesheet" type="text/css" th:href="@{/bootstrap-4.3.1/css/bootstrap.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/bootstrap-4.3.1/css/bootstrap-essentials.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/bootstrap-4.3.1/css/bootstrap-dialog.min.css}" />		
+		<script th:src="@{|/jquery-3.3.1/js/jquery.min.js?v=${#dates.createNow()}|}"></script>
+		<script th:src="@{|/logines/js/popper.min.js?v=${#dates.createNow()}|}"></script>
+		<script th:src="@{|/bootstrap-4.3.1/js/bootstrap.min.js?v=${#dates.createNow()}|}"></script>
+		<script th:src="@{|/bootstrap-4.3.1/js/bootstrap-dialog.min.js?v=${#dates.createNow()}|}"></script>		
+		<script th:src="@{|/bootstrap-4.3.1/js/bootstrap-essentials.min.js?v=${#dates.createNow()}|}"></script>
+		
+		<div th:replace="fragments/languagelower.html :: FRG_language"></div>
+	com.my.binance.service.LanguageService.java
+		languages.add(new Language(0,"/images/locale-TR_2.png","Turkish","tr","TR","tr_TR",new Locale("tr","TR"),"T"));
+	com.my.binance.web.WebLinkController.java
+		mav.addObject("deflangimagepath",languageService.getLanguageImagePathByLocaleName(LocaleContextHolder.getLocale().getLanguage()));
+	com.my.binance.model.Language.java
+		private String imagePath;
+		
+restlogin:
+	com.my.binance.security.JWTAuthenticationFilter.java
+		this.setFilterProcessesUrl("/rest/login");
+		
+		
+SQL:
+	Settings
+		#*****************Data Source
+		spring.datasource.url=jdbc:h2:file:./db/binancedb;AUTO_SERVER=TRUE
+		#*****************H2 Database
+		spring.h2.console.settings.web-allow-others=false
+		spring.h2.console.path=/admin/h2-console
+		#*****************Jpa/Hibernate
+		spring.jpa.database=default 
+		spring.jpa.hibernate.ddl-auto=update
+		spring.jpa.properties.hibernate.show_sql=true 
+	Init:
+		./config/*.sql
+
+	

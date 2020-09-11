@@ -1,4 +1,4 @@
-logging.file: ./logs/webapp.log 
+logging.file.name: ./logs/springbootmybinance.log 
 logging:
   level:
     root: info

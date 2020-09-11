@@ -18,9 +18,9 @@ public class LanguageService
 	{
 		System.out.println("------------------------------");
 		languages=new ArrayList<>();
-		languages.add(new Language(0,"Turkish","tr","TR","tr_TR",new Locale("tr","TR"),"T"));
-		languages.add(new Language(0,"English","en","EN","en_EN",new Locale("en","EN"),"E"));
-		languages.add(new Language(0,"Deutsch","de","DE","de_DE",new Locale("de","DE"),"D"));
+		languages.add(new Language(0,"/images/locale-TR_2.png","Turkish","tr","TR","tr_TR",new Locale("tr","TR"),"T"));
+		languages.add(new Language(0,"/images/locale-EN_2.png","English","en","EN","en_EN",new Locale("en","EN"),"E"));
+		languages.add(new Language(0,"/images/locale-DE_2.png","Deutsch","de","DE","de_DE",new Locale("de","DE"),"D"));
 	}
 	
 	public Locale getLocale(String localeLongName)
@@ -106,6 +106,18 @@ public class LanguageService
 			if(lang.getLocaleLongName().equals(localeLongName))
 			{
 				return lang.getEdplang();
+			}
+		}
+		return "";
+	}
+	
+	public String getLanguageImagePathByLocaleName(String localeName)
+	{
+		for(Language lang:languages)
+		{
+			if(lang.getLanguageCode().equals(localeName))
+			{
+				return lang.getImagePath();
 			}
 		}
 		return "";

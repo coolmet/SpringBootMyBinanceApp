@@ -5,6 +5,7 @@ import java.util.Locale;
 public class Language
 {
 	private int id;
+	private String imagePath;
 	private String displayName;
 	private String languageCode;
 	private String countryCode;
@@ -16,10 +17,11 @@ public class Language
 	{
 	}
 	
-	public Language(int id,String displayName,String languageCode,String countryCode,String localeLongName,Locale locale,String edplang)
+	public Language(int id,String imagePath,String displayName,String languageCode,String countryCode,String localeLongName,Locale locale,String edplang)
 	{
 		super();
 		this.id=id;
+		this.imagePath=imagePath;
 		this.displayName=displayName;
 		this.languageCode=languageCode;
 		this.countryCode=countryCode;
@@ -36,6 +38,16 @@ public class Language
 	public void setId(int id)
 	{
 		this.id=id;
+	}
+	
+	public String getImagePath()
+	{
+		return imagePath;
+	}
+	
+	public void setImagePath(String imagePath)
+	{
+		this.imagePath=imagePath;
 	}
 	
 	public String getDisplayName()
