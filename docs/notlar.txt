@@ -45,4 +45,8 @@ SQL:
 	Init:
 		./config/*.sql
 
+
+Test:
+	create "E:\Proje\web\SpringBootMyBinanceApp\src\test" folder
+	Project->RightClick->Properties->Java Build Path->Sources->Test->Add Folder and select "E:\Proje\web\SpringBootMyBinanceApp\src\test"
 	

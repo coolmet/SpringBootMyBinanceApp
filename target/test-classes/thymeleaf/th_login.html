@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Login</title>
+
+		
+
+</head>
+<body>
+
+	<h1 th:text="#{login.pagetitle}"></h1>
+	<form action="login" method="post">
+		<label th:text="#{login.label.username} + ':'"></label>		<input name="username" type="text" />
+		<br />
+		<label th:text="#{login.label.password} + ':'"></label>		<input name="password" type="password" />
+		<br />
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		<label th:text="#{login.label.rememberme} + ':'"></label>	<input name="remember-me" type="checkbox">
+		<br />
+		<button id="update" type="submit" th:text="#{login.button.submit}"></button>
+		
+	</form>
+	<div th:if="${#request.getParameter('loginFailed') == 'true'}" style="color: red; margin: 10px 0px;">
+		<div class="alert alert-danger" role="alert">
+			Login Failed!!!
+			<br />
+			Reason :
+			<span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}" th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}"> Static summary </span>
+		</div>
+	</div>
+</body>
+</html>

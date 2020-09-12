@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="#{index.pagetitle}"></title>
+</head>
+<body>
+	<h1 th:text="#{index.pagecontent}"></h1>
+
+	<th:block th:fragment="FRG_header_navbar">
+
+		<link rel="stylesheet" type="text/css" th:href="@{/css/appstyle.css}" />
+		<div class="topright">
+				<button class="navbutton" th:title="#{login.pagetitle}" onclick="window.location.href='/loginweb'" style="margin-left: 5px;">
+					<img src="/images/login48.png">
+				</button>
+		</div>
+		</br>
+	</br>
+	</br>
+	</br>
+	</th:block>
+</body>
+</html>

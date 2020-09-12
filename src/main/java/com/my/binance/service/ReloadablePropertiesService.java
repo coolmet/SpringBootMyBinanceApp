@@ -36,10 +36,10 @@ public abstract class ReloadablePropertiesService
 	@Autowired
 	private ResourceLoader resourceLoader;
 	
-	@Autowired
+	@Autowired(required=false)
 	private RestartEndpoint restartEndpoint;
 	
-	@Autowired
+	@Autowired(required=false)
 	private RefreshEndpoint refreshEndpoint;
 	
 	Logger LOGGER=LoggerFactory.getLogger(SprinBootAppConfiguration.class);
@@ -68,7 +68,14 @@ public abstract class ReloadablePropertiesService
 			// (i.e. kill the spring boot program before it initializes)
 			throw new RuntimeException("Unable to find property Source as file");
 		}
-		appConfigPropertySource=appConfigPsOp.get();
+		try
+		{
+			appConfigPropertySource=appConfigPsOp.get();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 		try
 		{
 			isProdMode=Arrays.stream(environment.getActiveProfiles()).anyMatch(env->(env.equalsIgnoreCase("prod")));

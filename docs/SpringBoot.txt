@@ -935,9 +935,9 @@ restartThread.start();
 				</configuration>
 ###########################################
 BANNER
-banner.txt    (ANSI Shadow font)
-http://patorjk.com/software/taag/#p=display&f=Whimsy&t=Abas%0AMobile
+banner.txt
 https://www.baeldung.com/spring-boot-custom-banners
+http://patorjk.com/software/taag/#p=display&f=Whimsy&t=Abas%0AMobile
 https://devops.datenkollektiv.de/banner.txt/index.html
 
 #spring.banner.location=classpath:/config/banner.txt

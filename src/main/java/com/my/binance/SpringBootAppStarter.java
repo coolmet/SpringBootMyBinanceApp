@@ -12,7 +12,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-// @EnableJpaAuditing(auditorAwareRef="myWebAppAuditorAware")
+@EnableJpaAuditing(auditorAwareRef="myBinanceAppAuditorAware")
 @SpringBootApplication
 @EnableAutoConfiguration
 @ServletComponentScan
