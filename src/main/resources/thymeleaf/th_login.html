@@ -11,9 +11,9 @@
 
 	<h1 th:text="#{login.pagetitle}"></h1>
 	<form action="login" method="post">
-		<label th:text="#{login.label.username} + ':'"></label>		<input name="username" type="text" />
+		<label th:text="#{login.label.username} + ':'"></label>		<input name="username" type="text"/>
 		<br />
-		<label th:text="#{login.label.password} + ':'"></label>		<input name="password" type="password" />
+		<label th:text="#{login.label.password} + ':'"></label>		<input name="password" type="password" placeholder="********" />
 		<br />
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		<label th:text="#{login.label.rememberme} + ':'"></label>	<input name="remember-me" type="checkbox">

@@ -171,7 +171,8 @@ public class SecurityConfiguration
 			    .failureUrl("/loginweb?loginFailed=true")// .failureUrl("/login?loginFailed=true")
 			    .and()
 			    .logout().invalidateHttpSession(true).clearAuthentication(true)
-			    .deleteCookies("remember_me_cookie").logoutRequestMatcher(new AntPathRequestMatcher("/**/logout"))
+			    .deleteCookies("JSESSIONID")
+			    .logoutRequestMatcher(new AntPathRequestMatcher("/**/logout"))
 			    .logoutSuccessUrl("/?logout")
 			    .and()
 			    .requestCache()
@@ -181,7 +182,16 @@ public class SecurityConfiguration
 			    .and()
 			    .csrf().disable();
 				
-			http.rememberMe().userDetailsService(userDetailsService).rememberMeServices(rememberMeServices());
+			http.rememberMe()
+			    .userDetailsService(userDetailsService)
+			    .rememberMeServices(rememberMeServices());
+			
+			// http
+			// .rememberMe()
+			// .key("your_key")
+			// .rememberMeCookieName("remember_me_cookie")
+			// .rememberMeParameter("remember_me_checkbox")
+			// .tokenValiditySeconds(2678400);
 			
 			http.sessionManagement()
 			    .maximumSessions(10)
