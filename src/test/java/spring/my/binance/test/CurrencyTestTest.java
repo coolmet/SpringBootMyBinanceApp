@@ -68,7 +68,7 @@ public class CurrencyTestTest
 	public void testSizeOfCurrencyTests()
 	{
 		List<CurrencyTest> currencyTests=currencyTestService.findAll();
-		MatcherAssert.assertThat(currencyTests.size(),Matchers.equalTo(3));
+		MatcherAssert.assertThat(currencyTests.size(),Matchers.equalTo(2));
 	}
 	
 	@Test
