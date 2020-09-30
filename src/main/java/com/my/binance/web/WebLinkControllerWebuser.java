@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.my.binance.HttpSessionConfig;
 import com.my.binance.SprinBootAppConfiguration;
+import com.my.binance.service.BinSymbolsService;
 import com.my.binance.service.LanguageService;
 
 @Controller
@@ -19,6 +20,9 @@ public class WebLinkControllerWebuser
 	
 	@Autowired
 	private LanguageService languageService;
+	
+	@Autowired
+	private BinSymbolsService binSymbolsService;
 	
 	@Autowired
 	private SessionRegistry sessionRegistry;
@@ -33,6 +37,17 @@ public class WebLinkControllerWebuser
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("deflangimagepath",languageService.getLanguageImagePathByLocaleName(LocaleContextHolder.getLocale().getLanguage()));
 		mav.setViewName("th_binance_main");
+		return mav;
+	}
+	
+	@RequestMapping(value=
+	{"/web/binance/symbols"})
+	public ModelAndView webBinanceSymbols()
+	{
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("deflangimagepath",languageService.getLanguageImagePathByLocaleName(LocaleContextHolder.getLocale().getLanguage()));
+		mav.addObject("defsymbols",binSymbolsService.findAll());
+		mav.setViewName("th_binance_symbols");
 		return mav;
 	}
 }

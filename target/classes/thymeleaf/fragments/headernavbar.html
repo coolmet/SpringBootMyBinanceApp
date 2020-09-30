@@ -85,7 +85,7 @@
 				<button class="navbutton" th:title="#{headernavbar.tooltip.home}" onclick="window.location.href='/admin'" sec:authorize="hasRole('ADMIN')">
 					<img src="/images/home48.png">
 				</button>
-				<button class="navbutton" th:title="#{headernavbar.tooltip.home}" onclick="window.location.href='/web/binance'" sec:authorize="hasRole('USER_WEBUSER')">
+				<button class="navbutton" th:title="#{headernavbar.tooltip.home}" onclick="window.location.href='/web/binance'" sec:authorize="hasRole('WEBUSER')">
 					<img src="/images/home48.png">
 				</button>
 				<button class="navbutton" th:title="#{headernavbar.tooltip.home}" onclick="window.location.href='/wh'" sec:authorize="hasRole('USER_WAREHOUSE')">

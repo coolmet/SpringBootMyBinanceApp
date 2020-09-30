@@ -35,18 +35,6 @@
       "sourceMethod": "public com.my.binance.ConfigPropertiesServer.Servlet.Session getSession() "
     },
     {
-      "name": "server.servlet.session",
-      "type": "com.my.binance.ConfigPropertiesServer$Servlet$Session",
-      "sourceType": "com.my.binance.ConfigPropertiesServer$Servlet",
-      "sourceMethod": "public com.my.binance.ConfigPropertiesServer.Servlet.Session getSession() "
-    },
-    {
-      "name": "server.servlet.session",
-      "type": "com.my.binance.ConfigPropertiesServer$Servlet$Session",
-      "sourceType": "com.my.binance.ConfigPropertiesServer$Servlet",
-      "sourceMethod": "public com.my.binance.ConfigPropertiesServer.Servlet.Session getSession() "
-    },
-    {
       "name": "server.token",
       "type": "com.my.binance.ConfigPropertiesServer$Token",
       "sourceType": "com.my.binance.ConfigPropertiesServer",
@@ -76,52 +64,12 @@
       "sourceType": "com.my.binance.ConfigPropertiesApp$Edp"
     },
     {
-      "name": "abas.edp.fl",
-      "type": "java.lang.Boolean",
-      "sourceType": "com.my.binance.ConfigPropertiesApp$Edp"
-    },
-    {
-      "name": "abas.edp.fl",
-      "type": "java.lang.Boolean",
-      "sourceType": "com.my.binance.ConfigPropertiesApp$Edp"
-    },
-    {
-      "name": "abas.edp.fopmode",
-      "type": "java.lang.Boolean",
-      "sourceType": "com.my.binance.ConfigPropertiesApp$Edp"
-    },
-    {
-      "name": "abas.edp.fopmode",
-      "type": "java.lang.Boolean",
-      "sourceType": "com.my.binance.ConfigPropertiesApp$Edp"
-    },
-    {
       "name": "abas.edp.fopmode",
       "type": "java.lang.Boolean",
       "sourceType": "com.my.binance.ConfigPropertiesApp$Edp"
     },
     {
       "name": "abas.edp.lang",
-      "type": "java.lang.String",
-      "sourceType": "com.my.binance.ConfigPropertiesApp$Edp"
-    },
-    {
-      "name": "abas.edp.lang",
-      "type": "java.lang.String",
-      "sourceType": "com.my.binance.ConfigPropertiesApp$Edp"
-    },
-    {
-      "name": "abas.edp.lang",
-      "type": "java.lang.String",
-      "sourceType": "com.my.binance.ConfigPropertiesApp$Edp"
-    },
-    {
-      "name": "abas.edp.password",
-      "type": "java.lang.String",
-      "sourceType": "com.my.binance.ConfigPropertiesApp$Edp"
-    },
-    {
-      "name": "abas.edp.password",
       "type": "java.lang.String",
       "sourceType": "com.my.binance.ConfigPropertiesApp$Edp"
     },
@@ -136,38 +84,8 @@
       "sourceType": "com.my.binance.ConfigPropertiesApp$Edp"
     },
     {
-      "name": "abas.edp.port",
-      "type": "java.lang.Integer",
-      "sourceType": "com.my.binance.ConfigPropertiesApp$Edp"
-    },
-    {
-      "name": "abas.edp.port",
-      "type": "java.lang.Integer",
-      "sourceType": "com.my.binance.ConfigPropertiesApp$Edp"
-    },
-    {
       "name": "abas.edp.serverip",
       "type": "java.lang.String",
-      "sourceType": "com.my.binance.ConfigPropertiesApp$Edp"
-    },
-    {
-      "name": "abas.edp.serverip",
-      "type": "java.lang.String",
-      "sourceType": "com.my.binance.ConfigPropertiesApp$Edp"
-    },
-    {
-      "name": "abas.edp.serverip",
-      "type": "java.lang.String",
-      "sourceType": "com.my.binance.ConfigPropertiesApp$Edp"
-    },
-    {
-      "name": "abas.edp.sessiontimeout",
-      "type": "java.lang.Integer",
-      "sourceType": "com.my.binance.ConfigPropertiesApp$Edp"
-    },
-    {
-      "name": "abas.edp.sessiontimeout",
-      "type": "java.lang.Integer",
       "sourceType": "com.my.binance.ConfigPropertiesApp$Edp"
     },
     {
@@ -181,37 +99,7 @@
       "sourceType": "com.my.binance.ConfigPropertiesApp$S3"
     },
     {
-      "name": "abas.s3.base-dir",
-      "type": "java.lang.String",
-      "sourceType": "com.my.binance.ConfigPropertiesApp$S3"
-    },
-    {
-      "name": "abas.s3.base-dir",
-      "type": "java.lang.String",
-      "sourceType": "com.my.binance.ConfigPropertiesApp$S3"
-    },
-    {
       "name": "abas.s3.dir",
-      "type": "java.lang.String",
-      "sourceType": "com.my.binance.ConfigPropertiesApp$S3"
-    },
-    {
-      "name": "abas.s3.dir",
-      "type": "java.lang.String",
-      "sourceType": "com.my.binance.ConfigPropertiesApp$S3"
-    },
-    {
-      "name": "abas.s3.dir",
-      "type": "java.lang.String",
-      "sourceType": "com.my.binance.ConfigPropertiesApp$S3"
-    },
-    {
-      "name": "abas.s3.mandant",
-      "type": "java.lang.String",
-      "sourceType": "com.my.binance.ConfigPropertiesApp$S3"
-    },
-    {
-      "name": "abas.s3.mandant",
       "type": "java.lang.String",
       "sourceType": "com.my.binance.ConfigPropertiesApp$S3"
     },
@@ -236,38 +124,8 @@
       "sourceType": "com.my.binance.ConfigPropertiesServer$Servlet$Session"
     },
     {
-      "name": "server.servlet.session.timeout",
-      "type": "java.lang.String",
-      "sourceType": "com.my.binance.ConfigPropertiesServer$Servlet$Session"
-    },
-    {
-      "name": "server.servlet.session.timeout",
-      "type": "java.lang.String",
-      "sourceType": "com.my.binance.ConfigPropertiesServer$Servlet$Session"
-    },
-    {
       "name": "server.token.expiration-time",
       "type": "java.lang.Long",
-      "sourceType": "com.my.binance.ConfigPropertiesServer$Token"
-    },
-    {
-      "name": "server.token.expiration-time",
-      "type": "java.lang.Long",
-      "sourceType": "com.my.binance.ConfigPropertiesServer$Token"
-    },
-    {
-      "name": "server.token.expiration-time",
-      "type": "java.lang.Long",
-      "sourceType": "com.my.binance.ConfigPropertiesServer$Token"
-    },
-    {
-      "name": "server.token.header-string",
-      "type": "java.lang.String",
-      "sourceType": "com.my.binance.ConfigPropertiesServer$Token"
-    },
-    {
-      "name": "server.token.header-string",
-      "type": "java.lang.String",
       "sourceType": "com.my.binance.ConfigPropertiesServer$Token"
     },
     {
@@ -281,39 +139,9 @@
       "sourceType": "com.my.binance.ConfigPropertiesServer$Token"
     },
     {
-      "name": "server.token.prefix",
-      "type": "java.lang.String",
-      "sourceType": "com.my.binance.ConfigPropertiesServer$Token"
-    },
-    {
-      "name": "server.token.prefix",
-      "type": "java.lang.String",
-      "sourceType": "com.my.binance.ConfigPropertiesServer$Token"
-    },
-    {
       "name": "server.token.secret",
       "type": "java.lang.String",
       "sourceType": "com.my.binance.ConfigPropertiesServer$Token"
-    },
-    {
-      "name": "server.token.secret",
-      "type": "java.lang.String",
-      "sourceType": "com.my.binance.ConfigPropertiesServer$Token"
-    },
-    {
-      "name": "server.token.secret",
-      "type": "java.lang.String",
-      "sourceType": "com.my.binance.ConfigPropertiesServer$Token"
-    },
-    {
-      "name": "spring.mvc.locale",
-      "type": "java.lang.String",
-      "sourceType": "com.my.binance.ConfigPropertiesSpring$Mvc"
-    },
-    {
-      "name": "spring.mvc.locale",
-      "type": "java.lang.String",
-      "sourceType": "com.my.binance.ConfigPropertiesSpring$Mvc"
     },
     {
       "name": "spring.mvc.locale",

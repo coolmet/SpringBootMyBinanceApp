@@ -48,7 +48,7 @@
 				>
 			</button>
 			<ul class="dropdown-menu" id="dropdownmenu"
-				style="background-color: transparent; text-align: right; top: 10px; min-width: 45px; padding: 0px; margin-top: 50px;"
+				style="background-color: transparent; text-align: right; top: 10px; min-width: 45px; padding: 0px; margin-top: 10px;"
 			>
 				<div th:each="language,status : ${@languageService.getLanguages()}">
 					<img class="img-thumbnail hidden-xs" th:src=${language.imagePath} style="width: 45px; background-color: transparent; border: none; padding: 0px;"

@@ -176,6 +176,19 @@ button:focus {outline:0 !important;}
   align-items: center;
 }
 
+.center {
+  top: 2%;
+  position: relative;
+  left: -moz-calc(48% - 48px); /* Firefox */
+  left: -webkit-calc(48% - 48px); /* WebKit */
+  left: -o-calc(48% - 48px); /* Opera */
+  left: calc(48% - 48px); /* Standard */
+  justify-content: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  align-items: center;
+}
+
 .navbutton
 {
 	background: none; 
@@ -190,7 +203,7 @@ button:focus {outline:0 !important;}
   border-collapse: collapse;
   width: 100%;
   float: left; 
-  margin-top: 80px;
+  margin-top: 10px;
   font-size: 10px;
 }
 

@@ -1,2 +1,0 @@
-INSERT INTO DB_CURRENCY VALUES(default,'EUR','EUR content');
-INSERT INTO DB_CURRENCY VALUES(default,'USD','USD content');

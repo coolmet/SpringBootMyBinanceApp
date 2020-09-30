@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
+
+<head>
+<title>Empty</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale = 1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/appstyle.css}" />
+
+</head>
+
+
+<body>
+	<div th:insert="fragments/headernavbar.html :: FRG_header_navbar"></div>
+	
+	<!-- ################################## -->
+	<table id=usertable>
+		<thead>
+			<tr style="font-weight: bold;" bgcolor="#5DBCD2">
+				<th th:text="id" />
+				<th th:text="symbol" />
+				<th th:text="baseAsset" />
+				<th th:text="quoteAsset" />
+			</tr>
+		</thead>
+		<th:block th:each="symbol,iterStat:${defsymbols}">
+			<tr th:bgcolor="${iterStat.odd}?white:lightgray">
+				<td th:text="${symbol.getId()}" />
+				<td th:text="${symbol.getSymbol()}" />
+				<td th:text="${symbol.getBaseAsset()}" />
+				<td th:text="${symbol.getQuoteAsset()}" />
+			</tr>
+		</th:block>
+	</table>
+	<!-- ################################## -->
+
+</body>
