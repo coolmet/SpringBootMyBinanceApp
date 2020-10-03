@@ -50,4 +50,12 @@ public class WebLinkControllerWebuser
 		mav.setViewName("th_binance_symbols");
 		return mav;
 	}
+	
+	@RequestMapping(value=
+	{"/web/binance/symbols/update"})
+	public String webBinanceSymbolsUpdate()
+	{
+		binSymbolsService.updateAllFromJson();
+		return "redirect:/web/binance/symbols";
+	}
 }

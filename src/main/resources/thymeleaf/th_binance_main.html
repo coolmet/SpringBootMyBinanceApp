@@ -7,6 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale = 1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/appstyle.css}" />
 
+<link rel="stylesheet" type="text/css" th:href="@{/fontawesome-5.15.0/css/all.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/fontawesome-5.15.0/css/v4-shims.css}" />
+
 <!--===============================================================================================-->
 <link rel="icon" type="image/png" th:href="@{/images/mobile.ico}" />
 <!--===============================================================================================-->
@@ -18,7 +21,7 @@
 	<div th:insert="fragments/headernavbar.html :: FRG_header_navbar"></div>
 	
 	<div class="center">
-		<button class="button button-16" onclick="window.location.href='/web/binance/symbols'" th:text="#{web.binance.main.symbols}" />
+		<button class="button button-16 fab fa-btc" onclick="window.location.href='/web/binance/symbols'" th:text="#{web.binance.main.symbols}" />
 	</div>
 
 

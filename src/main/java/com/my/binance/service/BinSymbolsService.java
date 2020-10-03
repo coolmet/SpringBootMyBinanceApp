@@ -30,4 +30,6 @@ public interface BinSymbolsService
 	void deleteByBaseAsset(String baseAsset);
 	
 	void deleteByQuoteAsset(String quoteAsset);
+	
+	void updateAllFromJson();
 }

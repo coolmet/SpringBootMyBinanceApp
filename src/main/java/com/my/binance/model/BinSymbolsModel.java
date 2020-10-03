@@ -14,7 +14,7 @@ public class BinSymbolsModel
 {
 	@Id
 	@GeneratedValue
-	private int id;
+	private long id;
 	
 	@JsonProperty("symbol")
 	private String symbol;
@@ -25,12 +25,12 @@ public class BinSymbolsModel
 	@JsonProperty("quoteAsset")
 	private String quoteAsset;
 	
-	public int getId()
+	public long getId()
 	{
 		return id;
 	}
 
-	public void setId(int id)
+	public void setId(long id)
 	{
 		this.id=id;
 	}

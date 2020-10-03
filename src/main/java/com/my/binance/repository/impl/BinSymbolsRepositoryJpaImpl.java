@@ -19,6 +19,7 @@ public class BinSymbolsRepositoryJpaImpl implements BinSymbolsRepository
 	private BinSymbolsModel emptyBinSymbols()
 	{
 		BinSymbolsModel binSymbolsModel=new BinSymbolsModel();
+		binSymbolsModel.setId(-1);
 		binSymbolsModel.setSymbol("");
 		binSymbolsModel.setBaseAsset("");
 		binSymbolsModel.setQuoteAsset("");
@@ -47,22 +48,40 @@ public class BinSymbolsRepositoryJpaImpl implements BinSymbolsRepository
 	@Override
 	public BinSymbolsModel findBySymbol(String symbol)
 	{
-		return entityManager.createQuery("from BinSymbolsEntity where symbol = :psymbol",BinSymbolsModel.class).setParameter("psymbol",symbol).setMaxResults(1).getSingleResult();
-		
+		try
+		{
+			return entityManager.createQuery("from BinSymbolsEntity where symbol = :psymbol",BinSymbolsModel.class).setParameter("psymbol",symbol).setMaxResults(1).getSingleResult();
+		}
+		catch(Exception e)
+		{
+			return emptyBinSymbols();
+		}
 	}
 	
 	@Override
 	public BinSymbolsModel findByBaseAsset(String baseAsset)
 	{
-		return entityManager.createQuery("from BinSymbolsEntity where baseAsset = :pbaseAsset",BinSymbolsModel.class).setParameter("pbaseAsset",baseAsset).setMaxResults(1).getSingleResult();
-		
+		try
+		{
+			return entityManager.createQuery("from BinSymbolsEntity where baseAsset = :pbaseAsset",BinSymbolsModel.class).setParameter("pbaseAsset",baseAsset).setMaxResults(1).getSingleResult();
+		}
+		catch(Exception e)
+		{
+			return emptyBinSymbols();
+		}
 	}
 	
 	@Override
 	public BinSymbolsModel findByQuoteAsset(String quoteAsset)
 	{
-		return entityManager.createQuery("from BinSymbolsEntity where quoteAsset = :pquoteAsset",BinSymbolsModel.class).setParameter("quoteAsset",quoteAsset).setMaxResults(1).getSingleResult();
-		
+		try
+		{
+			return entityManager.createQuery("from BinSymbolsEntity where quoteAsset = :pquoteAsset",BinSymbolsModel.class).setParameter("quoteAsset",quoteAsset).setMaxResults(1).getSingleResult();
+		}
+		catch(Exception e)
+		{
+			return emptyBinSymbols();
+		}
 	}
 	
 	@Override
