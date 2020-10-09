@@ -20,6 +20,7 @@ public class BinSymbolsRepositoryJpaImpl implements BinSymbolsRepository
 	{
 		BinSymbolsModel binSymbolsModel=new BinSymbolsModel();
 		binSymbolsModel.setId(-1);
+		binSymbolsModel.setFavId(0);
 		binSymbolsModel.setSymbol("");
 		binSymbolsModel.setBaseAsset("");
 		binSymbolsModel.setQuoteAsset("");
@@ -29,7 +30,7 @@ public class BinSymbolsRepositoryJpaImpl implements BinSymbolsRepository
 	@Override
 	public List<BinSymbolsModel> findAll()
 	{
-		return entityManager.createQuery("from BinSymbolsEntity",BinSymbolsModel.class).getResultList();
+		return entityManager.createQuery("from BinSymbolsEntity order by FAV_ID desc",BinSymbolsModel.class).getResultList();
 	}
 	
 	@Override
@@ -38,6 +39,19 @@ public class BinSymbolsRepositoryJpaImpl implements BinSymbolsRepository
 		try
 		{
 			return entityManager.find(BinSymbolsModel.class,id);
+		}
+		catch(Exception rt)
+		{
+			return emptyBinSymbols();
+		}
+	}
+	
+	@Override
+	public BinSymbolsModel findByFavId(int favId)
+	{
+		try
+		{
+			return entityManager.find(BinSymbolsModel.class,favId);
 		}
 		catch(Exception rt)
 		{
@@ -82,6 +96,13 @@ public class BinSymbolsRepositoryJpaImpl implements BinSymbolsRepository
 		{
 			return emptyBinSymbols();
 		}
+	}
+	
+	@Override
+	public List<BinSymbolsModel> findAllByFavId(int favId)
+	{
+		return entityManager.createQuery("from BinSymbolsEntity where favid = :pfavid",BinSymbolsModel.class).setParameter("pfavid",favId).getResultList();
+		
 	}
 	
 	@Override

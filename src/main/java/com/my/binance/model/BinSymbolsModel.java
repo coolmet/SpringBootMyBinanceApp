@@ -1,5 +1,6 @@
 package com.my.binance.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -7,7 +8,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Entity(name = "BinSymbolsEntity")
+@Entity(name="BinSymbolsEntity")
 @Table(name="DB_BIN_SYMBOLS")
 @XmlRootElement
 public class BinSymbolsModel
@@ -15,6 +16,10 @@ public class BinSymbolsModel
 	@Id
 	@GeneratedValue
 	private long id;
+	
+	@JsonProperty("favid")
+	@Column(columnDefinition="integer default 0")
+	private Integer favId;
 	
 	@JsonProperty("symbol")
 	private String symbol;
@@ -29,12 +34,22 @@ public class BinSymbolsModel
 	{
 		return id;
 	}
-
+	
 	public void setId(long id)
 	{
 		this.id=id;
 	}
-
+	
+	public Integer getFavId()
+	{
+		return favId;
+	}
+	
+	public void setFavId(Integer favId)
+	{
+		this.favId=favId;
+	}
+	
 	public String getSymbol()
 	{
 		return symbol;
@@ -64,13 +79,11 @@ public class BinSymbolsModel
 	{
 		this.quoteAsset=quoteAsset;
 	}
-
+	
 	@Override
 	public String toString()
 	{
-		return "BinSymbols [id="+id+", symbol="+symbol+", baseAsset="+baseAsset+", quoteAsset="+quoteAsset+"]";
+		return "BinSymbolsModel [id="+id+", favId="+favId+", symbol="+symbol+", baseAsset="+baseAsset+", quoteAsset="+quoteAsset+"]";
 	}
-	
-	
 	
 }

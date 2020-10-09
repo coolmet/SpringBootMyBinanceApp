@@ -63,6 +63,13 @@ public class BinSymbolsServiceImpl implements BinSymbolsService
 	
 	@Override
 	@Transactional(propagation=Propagation.SUPPORTS,readOnly=true)
+	public BinSymbolsModel findByFavId(int favId)
+	{
+		return binSymbolsRepository.findByFavId(favId);
+	}
+	
+	@Override
+	@Transactional(propagation=Propagation.SUPPORTS,readOnly=true)
 	public BinSymbolsModel findBySymbol(String symbol)
 	{
 		return binSymbolsRepository.findBySymbol(symbol);
@@ -81,6 +88,14 @@ public class BinSymbolsServiceImpl implements BinSymbolsService
 	public BinSymbolsModel findByQuoteAsset(String quoteAsset)
 	{
 		return binSymbolsRepository.findByQuoteAsset(quoteAsset);
+	}
+	
+	@Override
+	@Transactional(propagation=Propagation.SUPPORTS,readOnly=true)
+	public List<BinSymbolsModel> findAllByFavId(int favId)
+	{
+		return binSymbolsRepository.findAllByFavId(favId);
+		
 	}
 	
 	@Override
@@ -138,11 +153,11 @@ public class BinSymbolsServiceImpl implements BinSymbolsService
 	@Override
 	public void updateAllFromJson()
 	{
-		List<BinSymbolsModel> vecBinSymbolsModel=new ArrayList<BinSymbolsModel>();
-		List<BinSymbolsModel> vecBinSymbolsModel2=this.findAll();
+		List<BinSymbolsModel> vecBinSymbolsModelJson=new ArrayList<BinSymbolsModel>();
+		List<BinSymbolsModel> vecBinSymbolsModelDB=this.findAll();
 		//
-		BinSymbolsModel binSymbolsModel;
-		BinSymbolsModel binSymbolsModel2;
+		BinSymbolsModel binSymbolsModelJson;
+		BinSymbolsModel binSymbolsModelDB;
 		try
 		{
 			JSONObject jo=new JSONObject(IOUtils.toString(new URL(BinLinks.URL_SYMBOLS).openStream(),StandardCharsets.UTF_8));
@@ -152,23 +167,28 @@ public class BinSymbolsServiceImpl implements BinSymbolsService
 				jo=ja.getJSONObject(i);
 				try
 				{
-					binSymbolsModel=new BinSymbolsModel();
-					binSymbolsModel.setSymbol(jo.getString("symbol"));
-					binSymbolsModel.setBaseAsset(jo.getString("baseAsset"));
-					binSymbolsModel.setQuoteAsset(jo.getString("quoteAsset"));
-					//
-					binSymbolsModel2=this.findBySymbol(jo.getString("symbol"));
-					vecBinSymbolsModel.add(binSymbolsModel2);
-					if(binSymbolsModel2.getId()==-1)
+					binSymbolsModelJson=new BinSymbolsModel();
+					binSymbolsModelJson.setSymbol(jo.getString("symbol"));
+					binSymbolsModelJson.setBaseAsset(jo.getString("baseAsset"));
+					binSymbolsModelJson.setQuoteAsset(jo.getString("quoteAsset"));
+					if(jo.getString("symbol").equals("BTCUSDT")||jo.getString("symbol").equals("ETHUSDT"))
 					{
-						this.create(binSymbolsModel);
-						LOGGER.debug("Creating\t"+binSymbolsModel.toString());
+						binSymbolsModelJson.setFavId(1);
+					}
+					//
+					binSymbolsModelDB=this.findBySymbol(jo.getString("symbol"));
+					vecBinSymbolsModelJson.add(binSymbolsModelDB);
+					if(binSymbolsModelDB.getId()==-1)
+					{
+						this.create(binSymbolsModelJson);
+						LOGGER.debug("Creating\t"+binSymbolsModelJson.toString());
 					}
 					else
 					{
-						binSymbolsModel.setId(binSymbolsModel2.getId());
-						this.update(binSymbolsModel);
-						LOGGER.debug("Updating\t"+binSymbolsModel.toString());
+						binSymbolsModelJson.setId(binSymbolsModelDB.getId());
+						binSymbolsModelJson.setFavId(binSymbolsModelDB.getFavId());
+						this.update(binSymbolsModelJson);
+						LOGGER.debug("Updating\t"+binSymbolsModelJson.toString());
 					}
 				}
 				catch(Exception rt)
@@ -180,9 +200,9 @@ public class BinSymbolsServiceImpl implements BinSymbolsService
 				}
 			}
 			//
-			List<BinSymbolsModel> result = vecBinSymbolsModel2.stream()
-			    .filter(el -> vecBinSymbolsModel.stream().noneMatch(el::equals))
-			    .collect(Collectors.toList());
+			List<BinSymbolsModel> result=vecBinSymbolsModelDB.stream()
+			                                                 .filter(el->vecBinSymbolsModelJson.stream().noneMatch(el::equals))
+			                                                 .collect(Collectors.toList());
 			result.stream().forEach(f->this.delete(f.getId()));
 		}
 		catch(Exception rt)

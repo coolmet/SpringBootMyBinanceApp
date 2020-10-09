@@ -9,11 +9,17 @@ public interface BinSymbolsService
 	
 	BinSymbolsModel findById(Long id);
 	
+	BinSymbolsModel findByFavId(int favId);
+
+	
 	BinSymbolsModel findBySymbol(String symbol);
 	
 	BinSymbolsModel findByBaseAsset(String baseAsset);
 	
 	BinSymbolsModel findByQuoteAsset(String quoteAsset);
+	
+	List<BinSymbolsModel> findAllByFavId(int favId);
+
 	
 	List<BinSymbolsModel> findAllBySymbol(String symbol);
 	
