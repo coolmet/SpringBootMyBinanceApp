@@ -17,7 +17,7 @@
 	<div th:insert="fragments/headernavbar.html :: FRG_header_navbar"></div>
 
 	<div class="abascontainer-buttons">
-		<button type="button" class="button button-14 fas fa-sync" style="padding: 0px 5px;" onclick="window.location.href='/web/binance/symbols/updateall'" th:text="#{web.binance.main.symbols.update}" />
+		<button type="button" class="button button-14 fas fa-sync" style="padding: 0px 5px;" onclick="window.location.href='/web/binance/symbols/update/all'" th:text="#{web.binance.main.symbols.update}" />
 	</div>
 
 
@@ -38,18 +38,19 @@
 			<tr th:bgcolor="${iterStat.odd}?white:lightgray">
 				<td th:text="${symbol.getId()}" />
 				<td>
-					<span th:text="${symbol.getFavId()}">XXXX</span>
-					<span th:if="${symbol.getFavId() == 0}">
-						<i class="fa fa-bullseye fa-2x" style="color: #009933; text-align: center;" aria-hidden="true"></i>
-					</span>
-					<span th:if="${symbol.getFavId() != 0}">
-						<i class="fa fa-dot-circle fa-2x" style="color: #d5b414; text-align: center;" aria-hidden="true"></i>
-					</span>
+					<a th:href=@{/web/binance/symbols/update/favstatus(symbolid=${symbol.id})} class="btn">
+						<span th:if="${symbol.getFavId() == 0}">
+							<i class="fa fa-bullseye fa-2x" style="color: #009933; text-align: center;" aria-hidden="true"></i>
+						</span>
+						<span th:if="${symbol.getFavId() != 0}">
+							<i class="fa fa-dot-circle fa-2x" style="color: #d5b414; text-align: center;" aria-hidden="true"></i>
+						</span>
+					</a>
 				</td>
 				<td>
 					<span th:text="${symbol.getSymbol()}">XXXX</span>
-					<span>					
-						<a th:href=@{/web/binance/symbols/update(symbolid=${symbol.id})} class="btn">
+					<span>
+						<a th:href=@{/web/binance/symbols/update/symboldata(symbolid=${symbol.id})} class="btn">
 							<i class="fa fa-arrow-circle-right fa-2x" style="color: #009933; text-align: center;" aria-hidden="true"></i>
 						</a>
 					</span>

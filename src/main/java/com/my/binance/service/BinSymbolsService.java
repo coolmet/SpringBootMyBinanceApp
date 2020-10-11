@@ -10,7 +10,6 @@ public interface BinSymbolsService
 	BinSymbolsModel findById(Long id);
 	
 	BinSymbolsModel findByFavId(int favId);
-
 	
 	BinSymbolsModel findBySymbol(String symbol);
 	
@@ -19,7 +18,6 @@ public interface BinSymbolsService
 	BinSymbolsModel findByQuoteAsset(String quoteAsset);
 	
 	List<BinSymbolsModel> findAllByFavId(int favId);
-
 	
 	List<BinSymbolsModel> findAllBySymbol(String symbol);
 	
@@ -38,4 +36,7 @@ public interface BinSymbolsService
 	void deleteByQuoteAsset(String quoteAsset);
 	
 	void updateAllFromJson();
+	
+	void changeFavStatus(long id);
+
 }

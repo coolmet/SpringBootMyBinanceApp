@@ -54,18 +54,25 @@ public class WebLinkControllerWebuser
 	}
 	
 	@RequestMapping(value=
-	{"/web/binance/symbols/updateall"})
+	{"/web/binance/symbols/update/all"})
 	public String webBinanceSymbolsUpdateAll()
 	{
 		binSymbolsService.updateAllFromJson();
 		return "redirect:/web/binance/symbols";
 	}
 	
-	@RequestMapping(value="/web/binance/symbols/update",method=RequestMethod.GET)
-	public String handleDeleteUser(@RequestParam(name="symbolid") String symbolId)
+	@RequestMapping(value="/web/binance/symbols/update/favstatus",method=RequestMethod.GET)
+	public String webBinanceSymbolsUpdateFavStatus(@RequestParam(name="symbolid") long symbolId)
+	{
+		binSymbolsService.changeFavStatus(symbolId);
+		return "redirect:/web/binance/symbols";
+	}
+	
+	@RequestMapping(value="/web/binance/symbols/update/symboldata",method=RequestMethod.POST)
+	public String webBinanceSymbolsUpdateSymbolData(@RequestParam(name="symbolid") String symbolId)
 	{
 		System.out.println(symbolId);
 		System.out.println("test");
-		return "redirect:/web/binance/symbols";
+		return "redirect:/web/binance/symbols/update/symboldatapage";
 	}
 }

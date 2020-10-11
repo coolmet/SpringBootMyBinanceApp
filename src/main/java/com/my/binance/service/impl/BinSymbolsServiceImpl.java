@@ -169,6 +169,7 @@ public class BinSymbolsServiceImpl implements BinSymbolsService
 				{
 					binSymbolsModelJson=new BinSymbolsModel();
 					binSymbolsModelJson.setSymbol(jo.getString("symbol"));
+					binSymbolsModelJson.setFavId(0);
 					binSymbolsModelJson.setBaseAsset(jo.getString("baseAsset"));
 					binSymbolsModelJson.setQuoteAsset(jo.getString("quoteAsset"));
 					if(jo.getString("symbol").equals("BTCUSDT")||jo.getString("symbol").equals("ETHUSDT"))
@@ -212,6 +213,14 @@ public class BinSymbolsServiceImpl implements BinSymbolsService
 			LOGGER.error("updateAllFromJson-1:"+sw.toString());
 		}
 		
+	}
+
+	@Override
+	public void changeFavStatus(long id)
+	{
+		BinSymbolsModel bsm=binSymbolsRepository.findById(id);
+		bsm.setFavId(bsm.getFavId()==0?1:0);
+		binSymbolsRepository.update(bsm);
 	}
 	
 }

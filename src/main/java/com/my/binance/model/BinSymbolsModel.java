@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.istack.NotNull;
 
 @Entity(name="BinSymbolsEntity")
 @Table(name="DB_BIN_SYMBOLS")
@@ -18,6 +19,7 @@ public class BinSymbolsModel
 	private long id;
 	
 	@JsonProperty("favid")
+	@NotNull
 	@Column(columnDefinition="integer default 0")
 	private Integer favId;
 	
