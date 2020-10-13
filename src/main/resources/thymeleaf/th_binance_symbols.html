@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 
 <head>
-<title>Empty</title>
+<title th:text="#{web.binance.symbols.pagetitle}"></title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale = 1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/appstyle.css}" />
@@ -50,7 +50,7 @@
 				<td>
 					<span th:text="${symbol.getSymbol()}">XXXX</span>
 					<span>
-						<a th:href=@{/web/binance/symbols/update/symboldata(symbolid=${symbol.id})} class="btn">
+						<a th:href=@{/web/binance/symbols/update/symboldataget(symbolid=${symbol.id})} class="btn">
 							<i class="fa fa-arrow-circle-right fa-2x" style="color: #009933; text-align: center;" aria-hidden="true"></i>
 						</a>
 					</span>

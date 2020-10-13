@@ -1,15 +1,20 @@
 package com.my.binance.web;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 import com.my.binance.HttpSessionConfig;
 import com.my.binance.SprinBootAppConfiguration;
 import com.my.binance.service.BinSymbolsService;
@@ -68,11 +73,31 @@ public class WebLinkControllerWebuser
 		return "redirect:/web/binance/symbols";
 	}
 	
-	@RequestMapping(value="/web/binance/symbols/update/symboldata",method=RequestMethod.POST)
-	public String webBinanceSymbolsUpdateSymbolData(@RequestParam(name="symbolid") String symbolId)
+	@RequestMapping(value="/web/binance/symbols/update/symboldataget",method=RequestMethod.GET)
+	public ModelAndView webBinanceSymbolsUpdateSymbolDataGet(HttpSession session,HttpServletRequest request)
 	{
-		System.out.println(symbolId);
-		System.out.println("test");
-		return "redirect:/web/binance/symbols/update/symboldatapage";
+		session.setAttribute("web.binance.symbol.data."+session.getId(),request.getParameter("symbolid"));
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("redirect:/web/binance/symbols/update/symboldata");
+		return mav;
+	}
+	
+	@RequestMapping(value=
+	{"/web/binance/symbols/update/symboldata"})
+	public ModelAndView webBinanceSymbolsUpdateSymbolData(HttpSession session,HttpServletRequest request, HttpServletResponse response) throws Exception 
+	{
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("deflangimagepath",languageService.getLanguageImagePathByLocaleName(LocaleContextHolder.getLocale().getLanguage()));
+		if(session.getAttribute("web.binance.symbol.data."+session.getId())!=null)
+		{
+			System.out.println(session.getAttribute("web.binance.symbol.data."+session.getId()));
+			session.removeAttribute("web.binance.symbol.data."+session.getId());
+			mav.setViewName("th_binance_symbols_data");
+		}
+		else
+		{
+			throw new RuntimeException("Bu sekilde erisemezsiniz ...");
+		}
+		return mav;
 	}
 }

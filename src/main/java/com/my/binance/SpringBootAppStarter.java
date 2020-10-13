@@ -4,6 +4,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.ServletComponentScan;
@@ -14,7 +15,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableJpaAuditing(auditorAwareRef="myBinanceAppAuditorAware")
 @SpringBootApplication
-@EnableAutoConfiguration
+@EnableAutoConfiguration// (exclude = {ErrorMvcAutoConfiguration.class})
 @ServletComponentScan
 @EnableScheduling
 public class SpringBootAppStarter
