@@ -25,7 +25,18 @@ public class MyErrorController implements ErrorController
 		mav.setViewName("error");
 		//
 		Object status=request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+		String path=""+request.getAttribute(RequestDispatcher.ERROR_REQUEST_URI);
+		String timestamp=ZonedDateTime.now(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH.mm.ss.SSS"));
+		String error="";
+		String message="";
+		String exception="";
+		String trace="";
+		//
 		Exception e=(Exception)request.getAttribute("org.springframework.boot.web.servlet.error.DefaultErrorAttributes.ERROR");
+		if(e==null)
+		{
+			e=(Exception)request.getAttribute("javax.servlet.error.exception");
+		}
 		if(e==null)
 		{
 			e=(Exception)request.getAttribute("SPRING_SECURITY_403_EXCEPTION");
@@ -36,41 +47,55 @@ public class MyErrorController implements ErrorController
 			e=(Exception)request.getAttribute("SPRING_SECURITY_LAST_EXCEPTION");
 		}
 		//
-		if(e!=null)
+		if(e==null)
 		{
-			StringWriter sw=new StringWriter();
-			e.printStackTrace(new PrintWriter(sw));
-			mav.addObject("trace",sw.toString());
-			mav.addObject("error",e.getLocalizedMessage());
-			mav.addObject("message",""+e.getMessage());
-			mav.addObject("exception",""+e);
+			error=""+request.getAttribute(RequestDispatcher.ERROR_EXCEPTION);
+			message=""+request.getAttribute(RequestDispatcher.ERROR_MESSAGE);
+			exception=""+request.getAttribute(RequestDispatcher.ERROR_EXCEPTION);
+			trace=""+status;
+			// for(Enumeration<String> enumeration=request.getAttributeNames();enumeration.hasMoreElements();)
+			// {
+			// String attributeName=enumeration.nextElement();
+			// Object attribute=request.getAttribute(attributeName);
+			// System.out.println(attributeName+" \t\t-> "+attribute.getClass().getName()+":"+attribute.toString());
+			// }
 		}
 		else
 		{
-			mav.addObject("trace",request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE));
-			mav.addObject("error",request.getAttribute(RequestDispatcher.ERROR_EXCEPTION));
-			mav.addObject("message",request.getAttribute(RequestDispatcher.ERROR_MESSAGE));
-			mav.addObject("exception",request.getAttribute(RequestDispatcher.ERROR_EXCEPTION));
-			for(Enumeration<String> enumeration=request.getAttributeNames();enumeration.hasMoreElements();)
-			{
-				String attributeName=enumeration.nextElement();
-				Object attribute=request.getAttribute(attributeName);
-				System.out.println(attributeName+" -> "+attribute.getClass().getName()+":"+attribute.toString());
-			}
+			StringWriter sw=new StringWriter();
+			e.printStackTrace(new PrintWriter(sw));
+			error=""+e.getLocalizedMessage();
+			message=""+e.getMessage();
+			exception=""+e;
+			trace=sw.toString();
 		}
+		error=error.equals("null")?"":error;
+		message=message.equals("null")?"":message;
+		exception=exception.equals("null")?"":exception;
+		trace=trace.equals("null")?"":trace;
 		//
 		if(status!=null)
 		{
-			Integer statusCode=Integer.valueOf(status.toString());
-			if(statusCode==HttpStatus.NOT_FOUND.value())
+			if(error.equals(""))
 			{
-				mav.setViewName("error-404");
+				error=HttpStatus.valueOf(Integer.valueOf(status.toString())).series().name();
 			}
-			
+			if(message.equals(""))
+			{
+				message=HttpStatus.valueOf(Integer.valueOf(status.toString())).getReasonPhrase();
+			}
+			if(exception.equals(""))
+			{
+				exception=HttpStatus.valueOf(Integer.valueOf(status.toString())).name();
+			}
 		}
-		mav.addObject("timestamp",ZonedDateTime.now(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH.mm.ss.SSS")));
-		mav.addObject("path",""+request.getAttribute(RequestDispatcher.ERROR_REQUEST_URI));
-		mav.addObject("status",status);
+		mav.addObject("timestamp",""+timestamp);
+		mav.addObject("path",""+path);
+		mav.addObject("status",""+status);
+		mav.addObject("error",""+error);
+		mav.addObject("message",""+message);
+		mav.addObject("exception",""+exception);
+		mav.addObject("trace",""+trace);
 		
 		return mav;
 	}
