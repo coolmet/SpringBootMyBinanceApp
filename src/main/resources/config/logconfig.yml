@@ -13,6 +13,7 @@ logging:
     org.hibernate: info 
     org.thymeleaf: info
     web: info
+    org.springframework.data.mongodb: info
   file: 
     max-history: 20 
     max-size: 50MB

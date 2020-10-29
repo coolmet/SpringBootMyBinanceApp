@@ -35,6 +35,7 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
@@ -46,6 +47,8 @@ import com.my.binance.ConfigPropertiesReloadeble;
 import com.my.binance.SpringBootAppStarter;
 import com.my.binance.model.BinSymbolsModel;
 import com.my.binance.model.CurrencyTest;
+import com.my.binance.mongodb.Characters;
+import com.my.binance.mongodb.CharactersService;
 import com.my.binance.service.BinSymbolsService;
 import com.my.binance.service.CurrencyTestService;
 import com.my.binance.service.ReloadablePropertiesService;
@@ -54,6 +57,7 @@ import com.my.binance.service.ReloadablePropertiesService;
 @SpringBootTest(classes=SpringBootAppStarter.class)
 @ActiveProfiles(profiles="test")
 @EnableJpaRepositories(basePackages="com.my.binance.repository")
+@EnableMongoRepositories("com.my.binance.mongodb")
 @TestPropertySource("classpath:/config/appconfig.properties")
 @TestPropertySource("classpath:/config/webserverconfig.properties")
 @TestPropertySource("classpath:/config/userlistconfig.yml")
@@ -74,6 +78,7 @@ public class CurrencyTestTest
 	
 	@Autowired
 	private MessageSource messageSource;
+	
 	
 	@Test
 	public void generateEncodedPasswords()
@@ -107,7 +112,7 @@ public class CurrencyTestTest
 					{
 						binSymbolsService.create(binSymbolsModel);
 						System.out.println("+++\t"+binSymbolsModel.toString()+"\t\t"+binSymbolsService.findBySymbol(jo.getString("symbol")).getId());
-
+						
 					}
 					else
 					{

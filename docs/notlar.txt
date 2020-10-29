@@ -44,6 +44,20 @@ SQL:
 		spring.jpa.properties.hibernate.show_sql=true 
 	Init:
 		./config/*.sql
+		
+mongodb
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+            <version>2.3.4.RELEASE</version>
+        </dependency>
+        
+        #mongodb
+		#spring.data.mongodb.username=root
+		#spring.data.mongodb.password=root
+		spring.data.mongodb.host=localhost
+		spring.data.mongodb.port=27017
+		spring.data.mongodb.database=SampleDatabase
 
 
 Test:
